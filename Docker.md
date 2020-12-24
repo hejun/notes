@@ -109,6 +109,10 @@ openssl genrsa -out server-key.pem 4096
 # 替换 $HOST 为本机IP
 
 openssl req -subj "/CN=$HOST" -sha256 -new -key server-key.pem -out server.csr
+```
+
+```
+# 替换 $HOST 为本机IP
 
 echo subjectAltName = DNS:$HOST,IP:127.0.0.1 >> extfile.cnf
 ```
