@@ -1,4 +1,4 @@
-## Docker
+## Docker安装配置
 
 > 安装
 
@@ -36,7 +36,7 @@ yum install docker-ce docker-ce-cli containerd.io
 ```
 mkdir -p /etc/docker
 
-sudo tee /etc/docker/daemon.json <<-'EOF'
+tee /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": ["https://zv4800vv.mirror.aliyuncs.com", "https://docker.mirrors.ustc.edu.cn"],
   "log-driver": "json-file",
@@ -49,8 +49,6 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 
 systemctl daemon-reload
-
-systemctl restart docker
 ```
 
 ### 5.设置开机自启,启动
