@@ -169,10 +169,10 @@ mkdir -pv ~/.docker
 
 cp -v {ca,cert,key}.pem ~/.docker
 
-# vi /etc/profile
+vi /etc/profile
 export DOCKER_HOST=tcp://127.0.0.1:2376 DOCKER_TLS_VERIFY=1
 
-# source /etc/profile
+source /etc/profile
 ```
 
 > 开通防火墙端口
