@@ -49,8 +49,6 @@ tee /etc/docker/daemon.json <<-'EOF'
 EOF
 
 systemctl daemon-reload
-
-systemctl restart docker
 ```
 
 ### 5.设置开机自启,启动
