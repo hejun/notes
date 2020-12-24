@@ -147,20 +147,20 @@ export DOCKER_HOST=tcp://127.0.0.1:2376 DOCKER_TLS_VERIFY=1
 # source /etc/profile
 ```
 
-3. 开通防火墙端口
+> 开通防火墙端口
 
-    - 开通2375
+- 开通2375
 
-    ```
-    firewall-cmd --zone=public --add-port=2375/tcp --permanent
+```
+firewall-cmd --zone=public --add-port=2375/tcp --permanent
 
-    firewall-cmd --reload
-    ```
+firewall-cmd --reload
+```
 
-    - 开通2376
+- 开通2376
 
-    ```
-    firewall-cmd --zone=public --add-port=2376/tcp --permanent
+```
+firewall-cmd --zone=public --add-port=2376/tcp --permanent
 
-    firewall-cmd --reload
-    ```
+firewall-cmd --reload
+```
