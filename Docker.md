@@ -125,7 +125,7 @@ chmod -v 0400 ca-key.pem key.pem server-key.pem
 chmod -v 0444 ca.pem server-cert.pem cert.pem
 ```
 
-设置docker监听2376端口
+2. 设置docker监听2376端口
 
 ```
 # vi /usr/lib/systemd/system/docker.service
@@ -134,7 +134,7 @@ chmod -v 0444 ca.pem server-cert.pem cert.pem
 ExecStart=/usr/bin/dockerd --tlsverify --tlscacert=ca.pem --tlscert=server-cert.pem --tlskey=server-key.pem -H=0.0.0.0:2376 -H fd:// --containerd=/run/containerd/containerd.sock
 ```
 
-2. 设置默认访问证书
+3. 设置默认访问证书
 
 ```
 mkdir -pv ~/.docker
