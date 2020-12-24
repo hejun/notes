@@ -36,7 +36,7 @@ yum install docker-ce docker-ce-cli containerd.io
 ```
 mkdir -p /etc/docker
 
-sudo tee /etc/docker/daemon.json <<-'EOF'
+tee /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": ["https://zv4800vv.mirror.aliyuncs.com", "https://docker.mirrors.ustc.edu.cn"],
   "log-driver": "json-file",
