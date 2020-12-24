@@ -17,6 +17,8 @@ swapon /mnt/swap
 ```
 
 ```
+# vi /etc/fstab
+
 /mnt/swap swap swap defaults 0 0
 ```
 
