@@ -125,7 +125,7 @@ chmod -v 0400 ca-key.pem key.pem server-key.pem
 chmod -v 0444 ca.pem server-cert.pem cert.pem
 ```
 
-2. 设置docker监听2376端口
+2. 修改 docker.service
 
 ```
 # vi /usr/lib/systemd/system/docker.service
