@@ -48,15 +48,15 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 }
 EOF
 
-sudo systemctl daemon-reload
+systemctl daemon-reload
 
-sudo systemctl restart docker
+systemctl restart docker
 ```
 
 ### 5.设置开机自启,启动
 
 ```
-systemctl enbale docker
+systemctl enable docker
 
 systemctl start docker
 ```
