@@ -9,14 +9,14 @@
    ```
    spring:
     datasource:
-      dba:
+      master:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/dba?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/master?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
         username: root
         password: 1234
-      dbb:
+      slave:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/dbb?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/slave?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
         username: root
         password: 1234
    ```
@@ -53,23 +53,23 @@
 
    ```
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.dba")
-    public DataSource dba() {
+    @ConfigurationProperties(prefix = "spring.datasource.master")
+    public DataSource master() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.dbb")
-    public DataSource dbb() {
+    @ConfigurationProperties(prefix = "spring.datasource.slave")
+    public DataSource slave() {
         return DataSourceBuilder.create().build();
     }
 
     @Bean
-    public DataSource dataSource(@Autowired DataSource dba, @Autowired DataSource dbb) throws Exception {
+    public DataSource dataSource(@Autowired DataSource master, @Autowired DataSource slave) throws Exception {
         Map<Object, Object> targetDataSources = new HashMap<>(5);
-        targetDataSources.put("dba", dba);
-        targetDataSources.put("dbb", dbb);
-        return new DynamicDataSource(dba, targetDataSources);
+        targetDataSources.put("master", master);
+        targetDataSources.put("slave", slave);
+        return new DynamicDataSource(master, targetDataSources);
     }
 
     @Bean
@@ -90,7 +90,7 @@
 
        @Around("execution(* com.test.service.*.insert*(..))")
        public Object around(ProceedingJoinPoint point) throws Throwable {
-           DynamicDataSource.setDataSource("dba");
+           DynamicDataSource.setDataSource("master");
            try {
                return point.proceed();
            } finally {
@@ -100,7 +100,7 @@
 
        @Around("execution(* com.test.service.*.select*(..))")
        public Object aroundBbb(ProceedingJoinPoint point) throws Throwable {
-           DynamicDataSource.setDataSource("dbb");
+           DynamicDataSource.setDataSource("slave");
            try {
                return point.proceed();
            } finally {
@@ -115,3 +115,9 @@
    ```
    @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
    ```
+
+> 基于 `Mybatis-Plus`
+
+Mybatis-Plus 自身已经实现多数据源,引入依赖按照官网配置即可
+
+[Mybatis Plus 多数据源](https://baomidou.com/guide/dynamic-datasource.html)
