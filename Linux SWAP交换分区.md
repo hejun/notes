@@ -1,6 +1,6 @@
-> Linux SWAP 分区
+## Linux SWAP 分区
 
-- 添加SWAP分区
+> 添加SWAP分区
 
 ```
 dd if=/dev/zero of=/mnt/swap bs=1M count=1024
@@ -26,7 +26,7 @@ vi /etc/sysctl.conf
 vm.swappiness = 30
 ```
 
-- 关闭SWAP分区
+> 关闭SWAP分区
 
 ```
 # 查询SWAP分区设置
