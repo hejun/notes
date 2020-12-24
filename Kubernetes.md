@@ -1,5 +1,4 @@
 ## Kubernetes
----
 > 安装
 ### 1.设置kubernetes国内源
 ```
