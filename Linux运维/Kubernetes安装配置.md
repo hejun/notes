@@ -104,6 +104,7 @@
    kubeadm init \
      --apiserver-advertise-address=192.168.1.5 \
      --image-repository registry.aliyuncs.com/google_containers \
+     --kubernetes-version v1.18.0 \
      --pod-network-cidr=10.244.0.0/16
    ```
 
