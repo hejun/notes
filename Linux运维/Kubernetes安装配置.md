@@ -153,9 +153,7 @@
    
    ```
    # 注: ... 为上述文件绝对路径
-   
-   sed -i 's/quay.io\/coreos/registry.cn-hangzhou.aliyuncs.com\/google-containers/g' ...
-   
+
    kubectl apply -f ...
    ```
    
