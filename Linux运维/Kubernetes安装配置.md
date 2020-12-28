@@ -14,9 +14,7 @@
 1. 关闭SWAP分区
 
    ```
-   # [$SWAP_File]SWAP分区标识。
-
-   swapoff [$SWAP_File]
+   swapoff -a
    ```
 
    ```
