@@ -7,6 +7,8 @@
 
 > 基于 `Kubeadm` 安装
 
+参考 [使用 kubeadm 创建集群](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+
 ### 1. 初始化系统
 
 1. 关闭SWAP分区
@@ -108,3 +110,59 @@
    ```
 
    注: [kubeadm参数说明](https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm-init/)
+   
+   使用 `kubectl` 工具
+   
+   - 非 `root` 用户
+
+      ```
+      mkdir -p $HOME/.kube
+      
+      cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+      
+      chown $(id -u):$(id -g) $HOME/.kube/config
+      ```
+
+   - `root` 用户
+
+      ```
+      # vi vi /etc/profile
+     
+      export KUBECONFIG=/etc/kubernetes/admin.conf
+      
+      source /etc/profile
+      ```
+
+   验证方式
+
+   ```
+   kubectl get nodes
+   ```
+
+2. 引导Node
+
+   ```
+   # 下列语句并不对,需要Copy引导Master时提示的类似于下列的语句
+   
+   kubeadm join 192.168.1.5:6443 --token ffr7uf.s3auu9n7bomks29x \
+       --discovery-token-ca-cert-hash sha256:256114a4aa95cf044a01c944ae7cf14e67dc9c2cbcca5eb496ebe082c1028e32
+   ```
+
+3. 安装Pod网络附加组件
+
+   由于网络原因,访问 [Flannel](https://github.com/coreos/flannel/blob/master/Documentation/kube-flannel.yml)
+   将文件内容放置本地,之后执行下列命令
+   
+   ```
+   # 注: ... 为上述文件绝对路径
+   
+   sed -i 's/quay.io\/coreos/registry.cn-hangzhou.aliyuncs.com\/google-containers/g' ...
+   
+   kubectl apply -f ...
+   ```
+   
+   执行下列命令查看进度,等待所有完成
+   
+   ```
+   kubectl get pods -n kube-system
+   ```
