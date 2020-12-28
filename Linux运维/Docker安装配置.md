@@ -48,7 +48,7 @@ tee /etc/docker/daemon.json <<-'EOF'
   "storage-driver": "overlay2",
   "storage-opts": [
     "overlay2.override_kernel_check=true"
-  ]
+  ],
   "graph":"/hejun/docker"
 }
 EOF
