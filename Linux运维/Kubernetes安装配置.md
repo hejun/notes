@@ -124,7 +124,7 @@
    - `root` 用户
 
       ```
-      # vi vi /etc/profile
+      # vi /etc/profile
      
       export KUBECONFIG=/etc/kubernetes/admin.conf
       
