@@ -39,11 +39,16 @@ mkdir -p /etc/docker
 tee /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": ["https://zv4800vv.mirror.aliyuncs.com", "https://docker.mirrors.ustc.edu.cn"],
+  "exec-opts": ["native.cgroupdriver=systemd"],
   "log-driver": "json-file",
   "log-opts":{
     "max-size": "100m",
     "max-file": "1"
   },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
   "graph":"/hejun/docker"
 }
 EOF
