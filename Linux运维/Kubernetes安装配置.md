@@ -1,11 +1,11 @@
-## Kubernetes
+# Kubernetes
 
-> 搭建前提
+## 搭建前提
 
 - CPU 2核+
 - 内存 2G+
 
-> 基于 `Kubeadm` 安装
+## 基于 `Kubeadm` 安装
 
 参考 [使用 kubeadm 创建集群](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 
@@ -162,3 +162,5 @@
    ```
    kubectl get pods -n kube-system
    ```
+
+## 基于二进制方式安装
