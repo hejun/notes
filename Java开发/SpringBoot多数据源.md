@@ -1,6 +1,6 @@
-## SpringBoot 多数据源
+# SpringBoot 多数据源
 
-> 基于Spring `AbstractRoutingDataSource` + `AOP`
+## 基于Spring `AbstractRoutingDataSource` + `AOP`
 
 1. 配置DataSource
 
@@ -116,7 +116,7 @@
    @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
    ```
 
-> 基于 `Mybatis-Plus`
+## 基于 `Mybatis-Plus`
 
 Mybatis-Plus 自身已经实现多数据源,引入依赖按照官网配置即可
 
