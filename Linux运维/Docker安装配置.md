@@ -1,6 +1,6 @@
-## Docker安装配置
+# Docker安装配置
 
-> 安装
+## 安装
 
 参考: [Get Docker](https://docs.docker.com/engine/install/centos/)
 
@@ -64,7 +64,7 @@ systemctl enable docker
 systemctl start docker
 ```
 
-> 开启远程访问
+## 开启远程访问
 
 - 开启2375无密访问
 
@@ -178,7 +178,7 @@ export DOCKER_HOST=tcp://127.0.0.1:2376 DOCKER_TLS_VERIFY=1
 source /etc/profile
 ```
 
-> 开通防火墙端口
+## 开通防火墙端口
 
 - 开通2375
 
