@@ -1,4 +1,4 @@
-## 配置 Let's encrypt 证书
+# 配置 Let's encrypt 证书
 
 1. 获取Certbot
 
