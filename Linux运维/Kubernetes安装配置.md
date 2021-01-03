@@ -5,11 +5,7 @@
 - CPU 2核+
 - 内存 2G+
 
-## 基于 `Kubeadm` 安装
-
-参考 [使用 kubeadm 创建集群](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
-
-### 1. 初始化系统
+## 初始化系统
 
 1. 关闭SWAP分区
 
@@ -72,7 +68,11 @@
 
 注意: 版本请参考 [容器运行时](https://kubernetes.io/zh/docs/setup/production-environment/container-runtimes/#docker) 以免版本不兼容
 
-### 3. 安装 `kubeadm` `kubelet` `kubectl`
+## 基于 `Kubeadm` 安装
+
+参考 [使用 kubeadm 创建集群](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+
+### 1. 安装 `kubeadm` `kubelet` `kubectl`
 
 1. 设置kubernetes国内源
 
@@ -96,7 +96,7 @@
    systemctl enable --now kubelet
    ```
 
-### 4. 使用 `kubeadm` 引导集群
+### 2. 使用 `kubeadm` 引导集群
 
 1. 引导Master
 
