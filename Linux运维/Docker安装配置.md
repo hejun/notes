@@ -28,7 +28,7 @@ yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/d
 ### 3.安装
 
 ```
-yum install docker-ce docker-ce-cli containerd.io
+yum install docker-ce docker-ce-cli containerd.io -y
 ```
 
 ### 4.设置镜像加速
