@@ -49,7 +49,7 @@ tee /etc/docker/daemon.json <<-'EOF'
   "storage-opts": [
     "overlay2.override_kernel_check=true"
   ],
-  "graph":"/hejun/docker"
+  "graph":"/hejun/data/docker"
 }
 EOF
 
