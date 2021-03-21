@@ -22,7 +22,14 @@ yum remove docker \
 ```
 yum install -y yum-utils
 
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/docker-ce.repo
+```
+
+```
+# 上述有时候会失效,可更改 docker-ce.repo 的 baseurl 为下面这个
+# vi /etc/yum.repos.d/repo.repo
+
+https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/centos/7/x86_64/stable/
 ```
 
 ### 3.安装
