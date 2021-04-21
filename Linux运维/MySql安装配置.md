@@ -11,7 +11,7 @@ rpm -e --nodeps 上面查出来的Mariabd名称
 ## 下载mysql yum源
 
 ```
-wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+wget -P /etc/yum.repos.d/mysql-community.repo https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
 ```
 
 ## 修改默认下载版本
