@@ -11,12 +11,14 @@ rpm -e --nodeps 上面查出来的Mariabd名称
 ## 下载mysql yum源
 
 ```
-wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm -O /etc/yum.repos.d/mysql-community.repo
+wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
 ```
 
-## 修改默认下载版本
+## 安装并修改默认下载版本
 
 ```
+rpm -ivh mysql80-community-release-el7-3.noarch.rpm
+
 # vi /etc/yum.repos.d/mysql-community.repo
 
 # 将 [mysql57-community] 下的 enabled 改为 1
