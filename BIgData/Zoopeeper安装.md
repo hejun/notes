@@ -1,8 +1,4 @@
-# 大数据环境安装
-
-> 参考版本: [Cloudera 7.1.6](https://docs.cloudera.com/cdp-private-cloud-base/7.1.6/runtime-release-notes/topics/rt-pvc-runtime-component-versions.html)
-
-## Zookeeper (3.5.5)
+# Zookeeper (3.5.5)
 
 1. 下载 [Zookeeper](https://archive.apache.org/dist/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz)
 2. 解压
