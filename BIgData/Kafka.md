@@ -11,7 +11,8 @@
   # vi config/server.properties
   
   broker.id=<broker-id>
-  listeners=PLAINTEXT://<hostname | ip>:9092
+  listeners=PLAINTEXT://0.0.0.0:9092
+  advertised.listeners=PLAINTEXT://<ip | hostname>:9092
   log.dirs=/hejun/data/kafka
   zookeeper.connect=<zookeeper-ip>:2181
   ```
