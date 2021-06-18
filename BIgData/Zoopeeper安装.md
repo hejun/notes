@@ -20,11 +20,37 @@
   # vi bin/zkServer.sh
   # 在 ZOO_DATALOGDIR 这一行下面添加 ZOO_LOG_DIR="$($GREP "^[[:space:]]*dataLogDir" "$ZOOCFG" | sed -e 's/.*=//')"
   ```
-5. 启动 Zookeeper
+5. 设置开机自启
   ```
-  ./bin/zkServer.sh start ./conf/zoo.cfg
+  # vi /usr/lib/systemd/system/zookeeper.service
+  
+  [Unit]
+  Description=Zookeeper
+  After=network.target
+
+  [Service]
+  Type=forking
+  Environment="JAVA_HOME=/hejun/software/jdk1.8.0_271"
+  ExecStart=/hejun/software/apache-zookeeper-3.5.5/bin/zkServer.sh start /hejun/software/apache-zookeeper-3.5.5/conf/zoo.cfg
+  ExecReload=/hejun/software/apache-zookeeper-3.5.5/bin/zkServer.sh restart
+  ExecStop=/hejun/software/apache-zookeeper-3.5.5/bin/zkServer.sh stop
+
+  [Install]
+  WantedBy=multi-user.target
   ```
-6. 停止 Zookeeper
   ```
-  ./bin/zkServer.sh stop
+  systemctl daemon-reload
+  systemctl enable zookeeper
+  ```
+6. 启动&停止
+  ```
+  # 启动
+  systemctl start zookeeper
+  # 停止
+  systemctl stop zookeeper
+  ```
+ 7. 开放端口
+  ```
+  firewall-cmd --zone=public --add-port=2181/tcp --permanent
+  firewall-cmd --reload
   ```
