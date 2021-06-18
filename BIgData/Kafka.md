@@ -17,7 +17,7 @@
   ```
 4. 修改logs路径(非必须)
   ```
-  # # vi bin/kafka-run-class.sh
+  # vi bin/kafka-run-class.sh
   # 在顶部下面添加 LOG_DIR=/hejun/logs/kafka
   ```
 5. 设置开机自启
