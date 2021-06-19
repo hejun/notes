@@ -84,6 +84,8 @@
   After=network.target
 
   [Service]
+  User=root
+  Group=root
   Type=forking
   ExecStart=/hejun/software/hadoop-3.1.1/sbin/start-dfs.sh
   ExecStop=/hejun/software/hadoop-3.1.1/sbin/stop-dfs.sh
@@ -105,6 +107,8 @@
   After=network.target
 
   [Service]
+  User=root
+  Group=root
   Type=forking
   ExecStart=/hejun/software/hadoop-3.1.1/sbin/start-yarn.sh
   ExecStop=/hejun/software/hadoop-3.1.1/sbin/stop-yarn.sh
