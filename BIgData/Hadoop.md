@@ -31,8 +31,8 @@
   ```
   # vi etc/hadoop/yarn-env.sh
   
+  export YARN_NODEMANAGER_USER=root  
   export YARN_RESOURCEMANAGER_USER=root
-  export YARN_NODEMANAGER_USER=root
   ```
   ```
   # vi etc/hadoop/core-site.xml 在 configuration 中添加
