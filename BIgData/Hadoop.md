@@ -13,9 +13,15 @@
   ```
   - 生成 ssh
   ```
+  ssh localhost
+  ```
+  ```
   ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
   cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
   chmod 0600 ~/.ssh/authorized_keys
+  ```
+  ```
+  exit
   ```
   - 修改配置文件
   ```
@@ -24,7 +30,7 @@
   export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
   export HADOOP_HOME=/hejun/software/hadoop-3.1.1   # 打开 export HADOOP_HOME 并修改
   export HADOOP_LOG_DIR=/hejun/logs/hadoop          # 打开 export HADOOP_LOG_DIR 并修改
-  export HDFS_NAMENODE_USER=root                    # 修改 HDFS_NAMENODE_USER 为 root
+  export HDFS_NAMENODE_USER=root                    # 打开 HDFS_NAMENODE_USER 并修改 root
   export HDFS_DATANODE_USER=root                    # 新增
   export HDFS_SECONDARYNAMENODE_USER=root           # 新增
   ```
