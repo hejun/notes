@@ -1,6 +1,6 @@
-# Kafka (3.1.1)
+# Hadoop (3.1.1)
 
-1. 下载 [Kafka](https://archive.apache.org/dist/hadoop/common/hadoop-3.1.1/hadoop-3.1.1.tar.gz)
+1. 下载 [Hadoop](https://archive.apache.org/dist/hadoop/common/hadoop-3.1.1/hadoop-3.1.1.tar.gz)
 2. 解压
   ```
   tar -zxvf hadoop-3.1.1.tar.gz -C /hejun/software
