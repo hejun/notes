@@ -30,6 +30,8 @@
   After=zookeeper.target
 
   [Service]
+  User=root
+  Group=root
   Type=forking
   Environment="JAVA_HOME=/hejun/software/jdk1.8.0_271"
   ExecStart=/hejun/software/kafka_2.13-2.5.0/bin/kafka-server-start.sh -daemon /hejun/software/kafka_2.13-2.5.0/config/server.properties
