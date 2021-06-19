@@ -75,11 +75,12 @@
   ./bin/hdfs namenode -format
   ```
 5. 设置开机自启
+  - Dfs
   ```
-  # vi /usr/lib/systemd/system/hadoop.service
+  # vi /usr/lib/systemd/system/dfs.service
   
   [Unit]
-  Description=Hadoop
+  Description=Dfs
   After=network.target
 
   [Service]
@@ -93,17 +94,46 @@
   ```
   ```
   systemctl daemon-reload
-  systemctl enable hadoop
+  systemctl enable dfs
+  ```
+  - Yarn
+  ```
+  # vi /usr/lib/systemd/system/yarn.service
+  
+  [Unit]
+  Description=Yarn
+  After=network.target
+
+  [Service]
+  Type=forking
+  ExecStart=/hejun/software/hadoop-3.1.1/sbin/start-yarn.sh
+  ExecStop=/hejun/software/hadoop-3.1.1/sbin/stop-yarn.sh
+  PIDFile=/tmp/hadoop-root-nodemanager.pid
+
+  [Install]
+  WantedBy=multi-user.target
+  ```
+  ```
+  systemctl daemon-reload
+  systemctl enable yarn
   ```
 6. 启动&停止
+  - Dfs
   ```
-  # 启动
-  systemctl start hadoop
-  # 停止
-  systemctl stop hadoop
+  # 启动 DFS
+  systemctl start dfs
+  # 停止 DFS
+  systemctl stop dfs
+  ```
+  - Yarn
+  ```
+  # 启动 Yarn
+  systemctl start yarn
+  # 停止 Yarn
+  systemctl stop yarn
   ```
 7. 开启端口
   ```
-  firewall-cmd --zone=public --add-port=9870/tcp --permanent
+  firewall-cmd --zone=public --add-port=8088/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
   ```
