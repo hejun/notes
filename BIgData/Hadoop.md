@@ -86,6 +86,7 @@
   Type=forking
   ExecStart=/hejun/software/hadoop-3.1.1/sbin/start-dfs.sh
   ExecStop=/hejun/software/hadoop-3.1.1/sbin/stop-dfs.sh
+  PIDFile=/tmp/hadoop-root-namenode.pi
 
   [Install]
   WantedBy=multi-user.target
