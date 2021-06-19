@@ -29,6 +29,8 @@
   After=network.target
 
   [Service]
+  User=root
+  Group=root
   Type=forking
   Environment="JAVA_HOME=/hejun/software/jdk1.8.0_271"
   ExecStart=/hejun/software/apache-zookeeper-3.5.5/bin/zkServer.sh start /hejun/software/apache-zookeeper-3.5.5/conf/zoo.cfg
