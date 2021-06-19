@@ -39,7 +39,7 @@
   
   <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://<ip>:8020</value>
+    <value>hdfs://<ip>:9000</value>
   </property>
   <property>
     <name>hadoop.tmp.dir</name>
