@@ -47,7 +47,7 @@
   Type=forking
   ExecStart=/hejun/software/hbase-2.2.3/bin/start-hbase.sh
   ExecStop=/hejun/software/hbase-2.2.3/bin/stop-hbase.sh
-  PIDFile=/tmp/hbase--master.pid
+  PIDFile=/tmp/hbase-root-master.pid
 
   [Install]
   WantedBy=multi-user.target
