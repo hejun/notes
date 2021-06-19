@@ -8,7 +8,7 @@
 3. 修改配置文件
   - 修改hosts
   ```
-  # vi /ets/hosts
+  # vi /etc/hosts
   # 在 127.0.0.1 这行后面加上 hostname 命令查出来的值
   ```
   - 生成 ssh
