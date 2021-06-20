@@ -17,7 +17,7 @@
   export HBASE_MANAGES_ZK=false                     # 打开 export HBASE_MANAGES_ZK 并修改
   ```
   ```
-  # vi conf/hbase-site.xml 在 configuration 中添加
+  # vi conf/hbase-site.xml 清空 configuration 子节点后在 configuration 中添加
   
   <property>
     <name>hbase.rootdir</name>
