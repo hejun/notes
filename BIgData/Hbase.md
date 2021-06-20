@@ -32,11 +32,6 @@
     <value><ip>:2181</value>
   </property>
   ```
-  ```
-  # vi conf/regionservers
-  
-  # 删除 localhost, 改为本机IP
-  ```
 4. 设置开机自启
   ```
   # vi /usr/lib/systemd/system/hbase.service
