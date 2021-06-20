@@ -11,6 +11,9 @@
   ```
 3. 编译
   ```
+  cd /hejun/software/spark-3.1.2
+  ```
+  ```
   # vi pom.xml , repositories 节点下清空并添加下方节点, pluginRepositories 清空所有节点
   <repository>
      <id>cloudera</id>
