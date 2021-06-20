@@ -1,13 +1,13 @@
-# Hbase (2.2.3)
+# Hbase (2.3.5)
 
-1. 下载 [Hbase](https://archive.apache.org/dist/hbase/2.2.3/hbase-2.2.3-bin.tar.gz)
+1. 下载 [Hbase](https://archive.apache.org/dist/hbase/2.3.5/hbase-2.3.5-bin.tar.gz)
 2. 解压
   ```
-  tar -zxvf hbase-2.2.3-bin.tar.gz -C /hejun/software
+  tar -zxvf hbase-2.3.5-bin.tar.gz -C /hejun/software
   ```
 3. 修改配置文件
   ```
-  cd /hejun/software/hbase-2.2.3
+  cd /hejun/software/hbase-2.3.5
   ```
   ```
   # vi conf/hbase-env.sh
@@ -48,8 +48,8 @@
   User=root
   Group=root
   Type=forking
-  ExecStart=/hejun/software/hbase-2.2.3/bin/start-hbase.sh
-  ExecStop=/hejun/software/hbase-2.2.3/bin/stop-hbase.sh
+  ExecStart=/hejun/software/hbase-2.3.5/bin/start-hbase.sh
+  ExecStop=/hejun/software/hbase-2.3.5/bin/stop-hbase.sh
   PIDFile=/tmp/hbase-root-master.pid
 
   [Install]
