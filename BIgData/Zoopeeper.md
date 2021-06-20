@@ -1,13 +1,14 @@
-# Zookeeper (3.4.14)
+# Zookeeper (3.5.7)
 
-1. 下载 [Zookeeper](https://archive.apache.org/dist/zookeeper/zookeeper-3.4.14/zookeeper-3.4.14.tar.gz)
+1. 下载 [Zookeeper](https://archive.apache.org/dist/zookeeper/zookeeper-3.5.7/apache-zookeeper-3.5.7-bin.tar.gz)
 2. 解压
   ```
-  tar -zxvf zookeeper-3.4.14.tar.gz -C /hejun/software
+  tar -zxvf apache-zookeeper-3.5.7-bin.tar.gz -C /hejun/software
+  mv apache-zookeeper-3.5.7-bin zookeeper-3.5.7
   ```
 3. 修改配置文件
   ```
-  # cd /hejun/software/zookeeper-3.4.14
+  # cd /hejun/software/zookeeper-3.5.7
   # cp conf/zoo_sample.cfg conf/zoo.cfg
   # vi conf/zoo.cfg
   
@@ -32,9 +33,9 @@
   Group=root
   Type=forking
   Environment="JAVA_HOME=/hejun/software/jdk1.8.0_271"
-  ExecStart=/hejun/software/zookeeper-3.4.14/bin/zkServer.sh start /hejun/software/zookeeper-3.4.14/conf/zoo.cfg
-  ExecReload=/hejun/software/zookeeper-3.4.14/bin/zkServer.sh restart
-  ExecStop=/hejun/software/zookeeper-3.4.14/bin/zkServer.sh stop
+  ExecStart=/hejun/software/zookeeper-3.5.7/bin/zkServer.sh start /hejun/software/zookeeper-3.5.7/conf/zoo.cfg
+  ExecReload=/hejun/software/zookeeper-3.5.7/bin/zkServer.sh restart
+  ExecStop=/hejun/software/zookeeper-3.5.7/bin/zkServer.sh stop
 
   [Install]
   WantedBy=multi-user.target
