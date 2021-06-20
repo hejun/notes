@@ -7,6 +7,9 @@
   ```
 3. 修改配置文件
   ```
+  cd /hejun/software/hbase-2.2.3
+  ```
+  ```
   # vi conf/hbase-env.sh
   
   export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
