@@ -6,6 +6,9 @@
   tar -zxvf hadoop-3.1.1.tar.gz -C /hejun/software
   ```
 3. 修改配置文件
+  ```
+  cd hadoop-3.1.1
+  ```
   - 修改hosts
   ```
   # vi /etc/hosts
