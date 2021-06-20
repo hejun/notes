@@ -13,5 +13,5 @@
 |spark|3.1.2|[spark-3.1.2.tgz](https://archive.apache.org/dist/spark/spark-3.1.2/spark-3.1.2.tgz)|
 
 > 参考资料:
- - spark-3.1.2.tgz 下 pom.xml
+ - spark-3.1.2 源码下 pom.xml
  - http://hbase.apache.org/book.html#hadoop
