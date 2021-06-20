@@ -31,10 +31,11 @@
     <name>hbase.zookeeper.quorum</name>
     <value><ip>:2181</value>
   </property>
-  <property>
-    <name>hbase.master.info.port</name>
-    <value>60010</value>
-   </property>
+  ```
+  ```
+  # vi conf/regionservers
+  
+  # 删除 localhost, 改为本机IP
   ```
 4. 设置开机自启
   ```
@@ -68,6 +69,6 @@
   ```
 6. 开启端口
   ```
-  firewall-cmd --zone=public --add-port=60010/tcp --permanent
+  firewall-cmd --zone=public --add-port=16010/tcp --permanent
   firewall-cmd --reload
   ```
