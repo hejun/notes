@@ -1,13 +1,13 @@
-# Hadoop (3.1.1)
+# Hadoop (3.2.0)
 
-1. 下载 [Hadoop](https://archive.apache.org/dist/hadoop/common/hadoop-3.1.1/hadoop-3.1.1.tar.gz)
+1. 下载 [Hadoop](https://archive.apache.org/dist/hadoop/common/hadoop-3.2.0/hadoop-3.2.0.tar.gz)
 2. 解压
   ```
-  tar -zxvf hadoop-3.1.1.tar.gz -C /hejun/software
+  tar -zxvf hadoop-3.2.0.tar.gz -C /hejun/software
   ```
 3. 修改配置文件
   ```
-  cd /hejun/software/hadoop-3.1.1
+  cd /hejun/software/hadoop-3.2.0
   ```
   - 修改hosts
   ```
@@ -25,7 +25,7 @@
   # vi etc/hadoop/hadoop-env.sh
   
   export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
-  export HADOOP_HOME=/hejun/software/hadoop-3.1.1   # 打开 export HADOOP_HOME 并修改
+  export HADOOP_HOME=/hejun/software/hadoop-3.2.0   # 打开 export HADOOP_HOME 并修改
   export HADOOP_LOG_DIR=/hejun/logs/hadoop          # 打开 export HADOOP_LOG_DIR 并修改
   export HDFS_NAMENODE_USER=root                    # 打开 HDFS_NAMENODE_USER 并修改 root
   export HDFS_DATANODE_USER=root                    # 新增
@@ -90,8 +90,8 @@
   User=root
   Group=root
   Type=forking
-  ExecStart=/hejun/software/hadoop-3.1.1/sbin/start-dfs.sh
-  ExecStop=/hejun/software/hadoop-3.1.1/sbin/stop-dfs.sh
+  ExecStart=/hejun/software/hadoop-3.2.0/sbin/start-dfs.sh
+  ExecStop=/hejun/software/hadoop-3.2.0/sbin/stop-dfs.sh
   PIDFile=/tmp/hadoop-root-namenode.pid
 
   [Install]
@@ -113,8 +113,8 @@
   User=root
   Group=root
   Type=forking
-  ExecStart=/hejun/software/hadoop-3.1.1/sbin/start-yarn.sh
-  ExecStop=/hejun/software/hadoop-3.1.1/sbin/stop-yarn.sh
+  ExecStart=/hejun/software/hadoop-3.2.0/sbin/start-yarn.sh
+  ExecStop=/hejun/software/hadoop-3.2.0/sbin/stop-yarn.sh
   PIDFile=/tmp/hadoop-root-nodemanager.pid
 
   [Install]
