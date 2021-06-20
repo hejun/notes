@@ -23,5 +23,5 @@
   ```  
   export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g"
   
-  ./dev/make-distribution.sh --name spark-3.1.1-bin --tgz -Pyarn -Phadoop-3.1 -Phive -Phive-thriftserver -Phadoop.version=3.1.1 -Pscala.version=2.13.6
+  ./dev/make-distribution.sh --name spark-3.1.2-bin --tgz -Phive -Phive-thriftserver -Pyarn
   ```
