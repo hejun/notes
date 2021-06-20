@@ -1,13 +1,13 @@
-# Kafka (2.13-2.5.0)
+# Kafka (2.12-2.6.0)
 
-1. 下载 [Kafka](https://archive.apache.org/dist/kafka/2.5.0/kafka_2.13-2.5.0.tgz)
+1. 下载 [Kafka](https://archive.apache.org/dist/kafka/2.6.0/kafka_2.12-2.6.0.tgz)
 2. 解压
   ```
-  tar -zxvf kafka_2.13-2.5.0.tgz -C /hejun/software
+  tar -zxvf kafka_2.12-2.6.0.tgz -C /hejun/software
   ```
 3. 修改配置文件
   ```
-  # cd /hejun/software/kafka_2.13-2.5.0
+  # cd /hejun/software/kafka_2.12-2.6.0
   # vi config/server.properties
   
   broker.id=<broker-id>
@@ -34,8 +34,8 @@
   Group=root
   Type=forking
   Environment="JAVA_HOME=/hejun/software/jdk1.8.0_271"
-  ExecStart=/hejun/software/kafka_2.13-2.5.0/bin/kafka-server-start.sh -daemon /hejun/software/kafka_2.13-2.5.0/config/server.properties
-  ExecStop=/hejun/software/kafka_2.13-2.5.0/bin/kafka-server-stop.sh
+  ExecStart=/hejun/software/kafka_2.12-2.6.0/bin/kafka-server-start.sh -daemon /hejun/software/kafka_2.12-2.6.0/config/server.properties
+  ExecStop=/hejun/software/kafka_2.12-2.6.0/bin/kafka-server-stop.sh
 
   [Install]
   WantedBy=multi-user.target
