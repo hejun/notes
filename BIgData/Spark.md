@@ -23,5 +23,14 @@
   ```  
   export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g"
   
-  ./dev/make-distribution.sh --name 3.2.0 --tgz -Phive -Phive-thriftserver -Pyarn
+  ./dev/make-distribution.sh --tgz -Phive -Phive-thriftserver -Pyarn
+  ```
+  ```
+  cp spark-3.1.2-bin-3.2.0.tgz ../
+  ```
+ 4. 安装
+  ```
+  tar -zxvf spark-3.1.2-bin-3.2.0.tgz -C /hejun/software/
+  
+  mv spark-3.1.2-bin-3.2.0 spark-3.1.2
   ```
