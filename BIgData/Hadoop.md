@@ -80,10 +80,10 @@
 5. 设置开机自启
   - Dfs
   ```
-  # vi /usr/lib/systemd/system/dfs.service
+  # vi /usr/lib/systemd/system/hdfs.service
   
   [Unit]
-  Description=Dfs
+  Description=Hdfs
   After=network.target
 
   [Service]
@@ -99,7 +99,7 @@
   ```
   ```
   systemctl daemon-reload
-  systemctl enable dfs
+  systemctl enable hdfs
   ```
   - Yarn
   ```
@@ -125,12 +125,12 @@
   systemctl enable yarn
   ```
 6. 启动&停止
-  - Dfs
+  - Hdfs
   ```
-  # 启动 DFS
-  systemctl start dfs
-  # 停止 DFS
-  systemctl stop dfs
+  # 启动 HDFS
+  systemctl start hdfs
+  # 停止 HDFS
+  systemctl stop hdfs
   ```
   - Yarn
   ```
