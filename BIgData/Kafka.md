@@ -12,9 +12,9 @@
   
   broker.id=<broker-id>
   listeners=PLAINTEXT://0.0.0.0:9092
-  advertised.listeners=PLAINTEXT://<ip | hostname>:9092
+  advertised.listeners=PLAINTEXT://<ip>:9092  # 不要用 hostname
   log.dirs=/hejun/data/kafka
-  zookeeper.connect=<zookeeper-ip>:2181
+  zookeeper.connect=<zookeeper-ip>:2181       # 分布式环境下,用 逗号 分隔
   ```
 4. 修改logs路径(非必须)
   ```
