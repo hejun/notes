@@ -7,14 +7,29 @@
   mv apache-zookeeper-3.5.7-bin zookeeper-3.5.7
   ```
 3. 修改配置文件
-  ```
-  # cd /hejun/software/zookeeper-3.5.7
-  # cp conf/zoo_sample.cfg conf/zoo.cfg
-  # vi conf/zoo.cfg
-  
-  # 修改: dataDir=/hejun/data/zookeeper
-  # 添加: dataLogDir=/hejun/logs/zookeeper
-  ```
+  - 单机配置
+    ```
+    # cd /hejun/software/zookeeper-3.5.7
+    # cp conf/zoo_sample.cfg conf/zoo.cfg
+    # vi conf/zoo.cfg
+
+    # 修改: dataDir=/hejun/data/zookeeper
+    # 添加: dataLogDir=/hejun/logs/zookeeper
+    ```
+  - 分布式配置
+    ```
+    # 在 zoo.cfg 追加配置
+    server.<master-id>=<master-ip>:2888:3888
+    server.<slave-id>=<slave-ip>:2888:3888
+    ```
+    ```
+    # 在 master 服务器
+    echo <master-id> > <上面配置的dataDir>/myid
+    ```
+    ```
+    # 在 slave 服务器
+    echo <slave-id> > <上面配置的dataDir>/myid
+    ```
 4. 修改logs路径(非必须)
   ```
   # vi bin/zkServer.sh
@@ -52,7 +67,13 @@
   systemctl stop zookeeper
   ```
  7. 开放端口
-  ```
-  firewall-cmd --zone=public --add-port=2181/tcp --permanent
-  firewall-cmd --reload
-  ```
+  - 单机配置
+    ```
+    firewall-cmd --zone=public --add-port=2181/tcp --permanent
+    firewall-cmd --reload
+    ```
+  - 分布式配置
+    ```
+    firewall-cmd --zone=public --add-port=2888/tcp --add-port=3888/tcp --permanent
+    firewall-cmd --reload
+    ```
