@@ -48,11 +48,11 @@
       ```
     - core-site.xml
       ```
-      # vi etc/hadoop/core-site.xml 在 configuration 中添加
+      # vi etc/hadoop/core-site.xml                     # 在 configuration 中添加
 
       <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://<ip>:9000</value>
+        <value>hdfs://<master-hostname>:9000</value>
       </property>
       <property>
         <name>hadoop.tmp.dir</name>
@@ -62,7 +62,7 @@
     - hdfs-site.xml
       - 单机环境
         ```
-        # vi etc/hadoop/hdfs-site.xml 在 configuration 中添加
+        # vi etc/hadoop/hdfs-site.xml                   # 在 configuration 中添加
 
         <property>
           <name>dfs.replication</name>
@@ -71,8 +71,11 @@
         ```
       - 分布式环境
         ```
-        # vi etc/hadoop/hdfs-site.xml 在 configuration 中添加
-        
+        # vi etc/hadoop/hdfs-site.xml                   # 在 configuration 中添加
+        <property>
+          <name>dfs.replication</name>
+          <value>2</value>                              # 根据实际情况定,默认是3,应小于datanode数量
+        </property>
         <property>
           <name>dfs.namenode.name.dir</name>
           <value>/hejun/data/hdfs/name</value>
@@ -94,7 +97,7 @@
     - yarn-site.xml
       - 单机环境
         ```
-        # vi etc/hadoop/yarn-site.xml 在 configuration 中添加
+        # vi etc/hadoop/yarn-site.xml                    # 在 configuration 中添加
 
         <property>
           <name>yarn.nodemanager.aux-services</name>
@@ -106,12 +109,12 @@
         # 在 yarn-site.xml 追加
         <property>
           <name>yarn.resourcemanager.hostname</name>
-          <value><hostname></value>
+          <value><master-hostname></value>
         </property>
         <property>
           <name>yarn.resourcemanager.webapp.address</name>
-          <value><hostname>:8088</value>
-        </peoperty>
+          <value><master-hostname>:8088</value>
+        </property>
         ```
     - workers (分布式下才配置)
       ```
