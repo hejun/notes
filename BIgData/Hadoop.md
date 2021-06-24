@@ -106,7 +106,7 @@
         # 在 yarn-site.xml 追加
         <property>
           <name>yarn.resourcemanager.hostname</name>
-          <value><master-hostname></value>
+          <value><hostname></value>
         </property>
         ```
     - workers (分布式下才配置)
