@@ -108,6 +108,10 @@
           <name>yarn.resourcemanager.hostname</name>
           <value><hostname></value>
         </property>
+        <property>
+          <name>yarn.resourcemanager.webapp.address</name>
+          <value><hostname>:8088</value>
+        </peoperty>
         ```
     - workers (分布式下才配置)
       ```
