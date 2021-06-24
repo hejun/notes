@@ -23,7 +23,7 @@
 
     <property>
       <name>hbase.rootdir</name>
-      <value>hdfs://<master-ip>:9000/hbase</value>
+      <value>hdfs://<master-hostname>:9000/hbase</value>
     </property>
     <property>
       <name>hbase.cluster.distributed</name>
@@ -41,7 +41,7 @@
   - regionservers (分布式环境才配置)
     ```
     # vi conf/regionservers
-    # 删除 localhost, 改为节点ip
+    # 删除 localhost, 改为节点 hostname
     ```
 4. 设置开机自启
   ```
