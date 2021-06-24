@@ -10,69 +10,103 @@
   cd /hejun/software/hadoop-3.2.0
   ```
   - 修改hosts
-  ```
-  # vi /etc/hosts
-  # 在 127.0.0.1 这行后面加上 hostname 命令查出来的值
-  ```
+    ```
+    # vi /etc/hosts
+    # 在 127.0.0.1 这行后面加上 hostname 命令查出来的值
+    ```
   - 生成 ssh
-  ```
-  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-  chmod 0600 ~/.ssh/authorized_keys
-  ```
+    ```
+    ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    chmod 0600 ~/.ssh/authorized_keys
+    ```
   - 修改配置文件
-  ```
-  # vi etc/hadoop/hadoop-env.sh
-  
-  export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
-  export HADOOP_HOME=/hejun/software/hadoop-3.2.0   # 打开 export HADOOP_HOME 并修改
-  export HADOOP_LOG_DIR=/hejun/logs/hadoop          # 打开 export HADOOP_LOG_DIR 并修改
-  export HDFS_NAMENODE_USER=root                    # 打开 HDFS_NAMENODE_USER 并修改 root
-  export HDFS_DATANODE_USER=root                    # 新增
-  export HDFS_SECONDARYNAMENODE_USER=root           # 新增
-  ```
-  ```
-  # vi etc/hadoop/yarn-env.sh
-  
-  export YARN_NODEMANAGER_USER=root  
-  export YARN_RESOURCEMANAGER_USER=root
-  ```
-  ```
-  # vi etc/hadoop/core-site.xml 在 configuration 中添加
-  
-  <property>
-    <name>fs.defaultFS</name>
-    <value>hdfs://<ip>:9000</value>
-  </property>
-  <property>
-    <name>hadoop.tmp.dir</name>
-    <value>/hejun/data/hadoop</value>
-  </property>
-  ```
-  ```
-  # vi etc/hadoop/hdfs-site.xml 在 configuration 中添加
-  
-  <property>
-    <name>dfs.replication</name>
-    <value>1</value>
-  </property>
-  ```
-  ```
-  # vi etc/hadoop/mapred-site.xml
-  
-  <property>
-    <name>mapreduce.framework.name</name>
-    <value>yarn</value>
-  </property>
-  ```
-  ```
-  # vi etc/hadoop/yarn-site.xml 在 configuration 中添加
-  
-  <property>
-    <name>yarn.nodemanager.aux-services</name>
-    <value>mapreduce_shuffle</value>
-  </property>
-  ```
+    - hadoop-env.sh
+      ```
+      # vi etc/hadoop/hadoop-env.sh
+
+      export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
+      export HADOOP_HOME=/hejun/software/hadoop-3.2.0   # 打开 export HADOOP_HOME 并修改
+      export HADOOP_LOG_DIR=/hejun/logs/hadoop          # 打开 export HADOOP_LOG_DIR 并修改
+      export HDFS_NAMENODE_USER=root                    # 打开 HDFS_NAMENODE_USER 并修改 root
+      export HDFS_DATANODE_USER=root                    # 新增
+      export HDFS_SECONDARYNAMENODE_USER=root           # 新增
+      ```
+    - yarn-env.sh
+      ```
+      # vi etc/hadoop/yarn-env.sh
+
+      export YARN_NODEMANAGER_USER=root  
+      export YARN_RESOURCEMANAGER_USER=root
+      ```
+    - core-site.xml
+      ```
+      # vi etc/hadoop/core-site.xml 在 configuration 中添加
+
+      <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://<ip>:9000</value>
+      </property>
+      <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/hejun/data/hadoop</value>
+      </property>
+      ```
+    - hdfs-site.xml
+      - 单机环境
+        ```
+        # vi etc/hadoop/hdfs-site.xml 在 configuration 中添加
+
+        <property>
+          <name>dfs.replication</name>
+          <value>1</value>
+        </property>
+        ```
+      - 分布式环境
+        ```
+        # vi etc/hadoop/hdfs-site.xml 在 configuration 中添加
+        
+        <property>
+          <name>dfs.namenode.name.dir</name>
+          <value>/hejun/data/hdfs/name</value>
+        </property>
+        <property>
+          <name>dfs.datanode.data.dir</name>
+          <value>/hejun/data/hdfs/data</value>
+        </property>
+        ```
+    - mapred-site.xml
+      ```
+      # vi etc/hadoop/mapred-site.xml
+
+      <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+      </property>
+      ```
+    - yarn-site.xml
+      - 单机环境
+        ```
+        # vi etc/hadoop/yarn-site.xml 在 configuration 中添加
+
+        <property>
+          <name>yarn.nodemanager.aux-services</name>
+          <value>mapreduce_shuffle</value>
+        </property>
+        ```
+      - 分布式环境
+        ```
+        # 在 yarn-site.xml 追加
+        <property>
+          <name>yarn.resourcemanager.hostname</name>
+          <value><ip></value>
+        </property>
+        ```
+    - workers (分布式下才配置)
+      ```
+      # vi etc/hadoop/workers
+      # 删除 localhost , 改为三台机器的 ip
+      ```
 4. 格式化文件系统
   ```
   ./bin/hdfs namenode -format
