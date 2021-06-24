@@ -15,11 +15,18 @@
     # 在 127.0.0.1 这行后面加上 hostname 命令查出来的值
     ```
   - 生成 ssh
-    ```
-    ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
-    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-    chmod 0600 ~/.ssh/authorized_keys
-    ```
+    - 单机环境
+      ```
+      ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+      cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+      chmod 0600 ~/.ssh/authorized_keys
+      ```
+    - 分布式环境
+      ```
+      ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+      
+      ssh-copy-id -i ~/.ssh/id_rsa.pub <hostname | ip>  # hostname 所有机器都得执行一遍,包括本机
+      ```
   - 修改配置文件
     - hadoop-env.sh
       ```
