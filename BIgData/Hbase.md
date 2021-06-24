@@ -9,29 +9,40 @@
   ```
   cd /hejun/software/hbase-2.3.5
   ```
-  ```
-  # vi conf/hbase-env.sh
-  
-  export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
-  export HBASE_LOG_DIR=/hejun/logs/hbase            # 打开 export HBASE_LOG_DIR 并修改
-  export HBASE_MANAGES_ZK=false                     # 打开 export HBASE_MANAGES_ZK 并修改
-  ```
-  ```
-  # vi conf/hbase-site.xml 清空 configuration 子节点后在 configuration 中添加
-  
-  <property>
-    <name>hbase.rootdir</name>
-    <value>hdfs://<ip>:9000/hbase</value>
-  </property>
-  <property>
-    <name>hbase.cluster.distributed</name>
-    <value>true</value>
-  </property>
-  <property>
-    <name>hbase.zookeeper.quorum</name>
-    <value><ip>:2181</value>
-  </property>
-  ```
+  - hbase-env.sh
+    ```
+    # vi conf/hbase-env.sh
+
+    export JAVA_HOME=/hejun/software/jdk1.8.0_271     # 打开 export JAVA_HOME 并修改
+    export HBASE_LOG_DIR=/hejun/logs/hbase            # 打开 export HBASE_LOG_DIR 并修改
+    export HBASE_MANAGES_ZK=false                     # 打开 export HBASE_MANAGES_ZK 并修改
+    ```
+  - hbase-site.xml
+    ```
+    # vi conf/hbase-site.xml 清空 configuration 子节点后在 configuration 中添加
+
+    <property>
+      <name>hbase.rootdir</name>
+      <value>hdfs://<master-ip>:9000/hbase</value>
+    </property>
+    <property>
+      <name>hbase.cluster.distributed</name>
+      <value>true</value>
+    </property>
+    <property>
+      <name>hbase.zookeeper.quorum</name>
+      <value><zookeeper-ip>:2181</value>              # 多个用逗号分隔
+    </property>
+    <property>
+      <name>hbase.zookeeper.property.dataDir</name>
+      <value>/hejun/data/zookeeper</value>            # Zookeeper 的 dataDir, 和 zoo.cfg 保持一致
+    <property>
+    ```
+  - regionservers (分布式环境才配置)
+    ```
+    # vi conf/regionservers
+    # 删除 localhost, 改为节点ip
+    ```
 4. 设置开机自启
   ```
   # vi /usr/lib/systemd/system/hbase.service
