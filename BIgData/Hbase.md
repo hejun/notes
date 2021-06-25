@@ -36,7 +36,7 @@
     <property>
       <name>hbase.zookeeper.property.dataDir</name>
       <value>/hejun/data/zookeeper</value>            # Zookeeper 的 dataDir, 和 zoo.cfg 保持一致
-    <property>
+    </property>
     ```
   - regionservers (分布式环境才配置)
     ```
