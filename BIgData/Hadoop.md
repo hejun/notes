@@ -173,7 +173,7 @@
   ```
 7. 开启端口   (只在 namenode 做)
   ```
-  firewall-cmd --zone=public --add-port=8088/tcp --add-port=9870/tcp --permanent
+  firewall-cmd --zone=public --add-port=8088/tcp --add-port=9000/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
   ```
 8. NameNode 高可用
