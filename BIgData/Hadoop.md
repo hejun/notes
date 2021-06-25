@@ -176,3 +176,6 @@
   firewall-cmd --zone=public --add-port=8088/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
   ```
+8. NameNode 高可用
+  - [HDFSHighAvailabilityWithQJM](https://hadoop.apache.org/docs/r3.2.0/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html)
+  - [HDFSHighAvailabilityWithNFS](https://hadoop.apache.org/docs/r3.2.0/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html)
