@@ -43,7 +43,7 @@
     # vi conf/regionservers
     # 删除 localhost, 改为节点 hostname
     ```
-4. 设置开机自启
+4. 设置开机自启  (只在主节点做, 其他节点会跟随主节点启动)
   ```
   # vi /usr/lib/systemd/system/hbase.service
   
@@ -66,14 +66,14 @@
   systemctl daemon-reload
   systemctl enable hbase
   ```
-5. 启动&停止
+5. 启动&停止 (只在主节点做, 其他节点会跟随主节点启动)
   ```
   # 启动 Hbae
   systemctl start hbase
   # 停止 Hbae
   systemctl stop hbase
   ```
-6. 开启端口
+6. 开启端口 (只在主节点做)
   ```
   firewall-cmd --zone=public --add-port=16010/tcp --permanent
   firewall-cmd --reload
