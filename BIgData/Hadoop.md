@@ -147,7 +147,7 @@
   Type=forking
   ExecStart=/hejun/software/hadoop-3.2.0/sbin/start-yarn.sh
   ExecStop=/hejun/software/hadoop-3.2.0/sbin/stop-yarn.sh
-  PIDFile=/tmp/hadoop-root-nodemanager.pid
+  PIDFile=hadoop-root-resourcemanager.pid
 
   [Install]
   WantedBy=multi-user.target
