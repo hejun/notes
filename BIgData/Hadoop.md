@@ -171,10 +171,15 @@
   # 停止 Yarn
   systemctl stop yarn
   ```
-7. 开启端口   (只在 namenode 做)
+7. 开启端口
+  - namenode 节点
   ```
   firewall-cmd --zone=public --add-port=8088/tcp --add-port=9000/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
+  ```
+  - worker 节点
+  ```
+  firewall-cmd --zone=public --add-port=8031/tcp --permanent
   ```
 8. NameNode 高可用
   - [HDFSHighAvailabilityWithQJM](https://hadoop.apache.org/docs/r3.2.0/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html)
