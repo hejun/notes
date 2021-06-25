@@ -90,6 +90,18 @@
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
       </property>
+      <property>  
+        <name>yarn.resourcemanager.address</name>  
+        <value>master:8032</value>  
+      </property> 
+      <property>
+        <name>yarn.resourcemanager.scheduler.address</name>  
+        <value>master:8030</value>  
+      </property>
+      <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>  
+        <value>master:8031</value>  
+      </property>
       ```
     - mapred-site.xml
       ```
@@ -171,15 +183,10 @@
   # 停止 Yarn
   systemctl stop yarn
   ```
-7. 开启端口
-  - namenode 节点
+7. 开启端口   (只在 namenode 做)
   ```
-  firewall-cmd --zone=public --add-port=8088/tcp --add-port=9000/tcp --add-port=9870/tcp --permanent
+  firewall-cmd --zone=public --add-port=8030/tcp --add-port=8031/tcp --add-port=8032/tcp --add-port=8088/tcp --add-port=9000/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
-  ```
-  - worker 节点
-  ```
-  firewall-cmd --zone=public --add-port=8031/tcp --permanent
   ```
 8. NameNode 高可用
   - [HDFSHighAvailabilityWithQJM](https://hadoop.apache.org/docs/r3.2.0/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html)
