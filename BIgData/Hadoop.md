@@ -103,7 +103,7 @@
     - workers (分布式下才配置)
       ```
       # vi etc/hadoop/workers
-      # 删除 localhost , 改为三台机器的 hostname
+      # 删除 localhost , 改为 worker 机器的 hostname
       ```
 4. 格式化文件系统 (只在 namenode 做)
   ```
