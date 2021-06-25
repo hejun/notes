@@ -66,16 +66,13 @@
 
         <property>
           <name>dfs.replication</name>
-          <value>1</value>
+          <value>1</value>                              # 根据实际情况定,默认是3,应小于datanode数量
         </property>
         ```
       - 分布式环境
         ```
         # vi etc/hadoop/hdfs-site.xml                   # 在 configuration 中添加
-        <property>
-          <name>dfs.replication</name>
-          <value>2</value>                              # 根据实际情况定,默认是3,应小于datanode数量
-        </property>
+        
         <property>
           <name>dfs.namenode.name.dir</name>
           <value>/hejun/data/hdfs/name</value>
@@ -85,6 +82,15 @@
           <value>/hejun/data/hdfs/data</value>
         </property>
         ```
+    - yarn-site.xml
+      ```
+      # vi etc/hadoop/yarn-site.xml                    # 在 configuration 中添加
+
+      <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+      </property>
+      ```
     - mapred-site.xml
       ```
       # vi etc/hadoop/mapred-site.xml
@@ -94,38 +100,16 @@
         <value>yarn</value>
       </property>
       ```
-    - yarn-site.xml
-      - 单机环境
-        ```
-        # vi etc/hadoop/yarn-site.xml                    # 在 configuration 中添加
-
-        <property>
-          <name>yarn.nodemanager.aux-services</name>
-          <value>mapreduce_shuffle</value>
-        </property>
-        ```
-      - 分布式环境
-        ```
-        # 在 yarn-site.xml 追加
-        <property>
-          <name>yarn.resourcemanager.hostname</name>
-          <value><master-hostname></value>
-        </property>
-        <property>
-          <name>yarn.resourcemanager.webapp.address</name>
-          <value><master-hostname>:8088</value>
-        </property>
-        ```
     - workers (分布式下才配置)
       ```
       # vi etc/hadoop/workers
       # 删除 localhost , 改为三台机器的 hostname
       ```
-4. 格式化文件系统
+4. 格式化文件系统 (只在 namenode 做)
   ```
   ./bin/hdfs namenode -format
   ```
-5. 设置开机自启
+5. 设置开机自启  (只在 namenode 做, 其他节点会跟随 namenode 启动)
   - Dfs
   ```
   # vi /usr/lib/systemd/system/hdfs.service
@@ -172,7 +156,7 @@
   systemctl daemon-reload
   systemctl enable yarn
   ```
-6. 启动&停止
+6. 启动&停止   (只在 namenode 做, 其他节点会跟随 namenode 启动)
   - Hdfs
   ```
   # 启动 HDFS
@@ -187,7 +171,7 @@
   # 停止 Yarn
   systemctl stop yarn
   ```
-7. 开启端口
+7. 开启端口   (只在 namenode 做)
   ```
   firewall-cmd --zone=public --add-port=8088/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
