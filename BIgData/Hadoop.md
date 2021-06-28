@@ -94,6 +94,10 @@
         <name>yarn.resourcemanager.hostname</name>
         <value><master-hostname></value>
       </property>
+      <property>
+        <name>yarn.resourcemanager.bind-host</name>
+        <value>0.0.0.0</value>
+      </property>
       ```
     - mapred-site.xml
       ```
@@ -181,7 +185,7 @@
   |:--|:--|:--|
   |NameNode|9000/9820/9870/9871|```firewall-cmd --zone=public --add-port=9000/tcp --add-port=9820/tcp --add-port=9870-9871/tcp --permanent```|
   |SeconeNameNode|9868/9869|```firewall-cmd --zone=public --add-port=9868/tcp --add-port=9869/tcp --permanent```|
-  |Yarn|8088|```firewall-cmd --zone=public --add-port=8088/tcp --permanent```|
+  |Yarn|8088/8030/8031/8032/8033|```firewall-cmd --zone=public --add-port=8088/tcp  --add-port=8030-8033/tcp --permanent```|
   |DataNode|9864/9865/9866/9867|```firewall-cmd --zone=public --add-port=9864-9867/tcp --permanent```|
   
   ```
