@@ -33,10 +33,6 @@
       <name>hbase.zookeeper.quorum</name>
       <value><zookeeper-ip>:2181</value>              # 多个用逗号分隔
     </property>
-    <property>
-      <name>hbase.zookeeper.property.dataDir</name>
-      <value>/hejun/data/zookeeper</value>            # Zookeeper 的 dataDir, 和 zoo.cfg 保持一致
-    </property>
     ```
   - regionservers (分布式环境才配置)
     ```
@@ -75,6 +71,6 @@
   ```
 6. 开启端口 (只在主节点做)
   ```
-  firewall-cmd --zone=public --add-port=16010/tcp --permanent
+  firewall-cmd --zone=public --add-port=16000/tcp --add-port=16010/tcp --permanent
   firewall-cmd --reload
   ```
