@@ -70,7 +70,11 @@
   systemctl stop hbase
   ```
 6. 开启端口 (只在主节点做)
+  
+  |节点|端口|命令|
+  |:--|:--|:--|
+  |HMaster|16000/16010|firewall-cmd --zone=public --add-port=16000/tcp --add-port=16010/tcp --permanent|
+  |HRegionServer|16020|firewall-cmd --zone=public --add-port=16020/tcp --permanent|
   ```
-  firewall-cmd --zone=public --add-port=16000/tcp --add-port=16010/tcp --permanent
   firewall-cmd --reload
   ```
