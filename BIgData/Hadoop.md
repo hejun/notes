@@ -179,7 +179,7 @@
   
   |节点|端口|命令|
   |:--|:--|:--|
-  |NameNode|9820/9870/9871|```firewall-cmd --zone=public --add-port=9820/tcp --add-port=9870-9871/tcp --permanent```|
+  |NameNode|9000/9820/9870/9871|```firewall-cmd --zone=public --add-port=9000/tcp --add-port=9820/tcp --add-port=9870-9871/tcp --permanent```|
   |SeconeNameNode|9868/9869|```firewall-cmd --zone=public --add-port=9868/tcp --add-port=9869/tcp --permanent```|
   |Yarn|8088|```firewall-cmd --zone=public --add-port=8088/tcp --permanent```|
   |DataNode|9864/9865/9866/9867|```firewall-cmd --zone=public --add-port=9864-9867/tcp --permanent```|
