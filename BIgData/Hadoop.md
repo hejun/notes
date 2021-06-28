@@ -90,17 +90,9 @@
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
       </property>
-      <property>  
-        <name>yarn.resourcemanager.address</name>  
-        <value>master:8032</value>  
-      </property> 
       <property>
-        <name>yarn.resourcemanager.scheduler.address</name>  
-        <value>master:8030</value>  
-      </property>
-      <property>
-        <name>yarn.resourcemanager.resource-tracker.address</name>  
-        <value>master:8031</value>  
+        <name>yarn.resourcemanager.hostname</name>
+        <value><master-hostname></value>
       </property>
       ```
     - mapred-site.xml
@@ -184,8 +176,15 @@
   systemctl stop yarn
   ```
 7. 开启端口   (只在 namenode 做)
+  
+  |节点|端口|命令|
+  |:--|:--|:--|
+  |NameNode|9820/9870/9871|```firewall-cmd --zone=public --add-port=9820/tcp --add-port=9870-9871/tcp --permanent```|
+  |SeconeNameNode|9868/9869|```firewall-cmd --zone=public --add-port=9868/tcp --add-port=9869/tcp --permanent```|
+  |Yarn|8088|```firewall-cmd --zone=public --add-port=8088/tcp --permanent```|
+  |DataNode|9864/9865/9866/9867|```firewall-cmd --zone=public --add-port=9864-9867/tcp --permanent```|
+  
   ```
-  firewall-cmd --zone=public --add-port=8030/tcp --add-port=8031/tcp --add-port=8032/tcp --add-port=8088/tcp --add-port=9000/tcp --add-port=9870/tcp --permanent
   firewall-cmd --reload
   ```
 8. NameNode 高可用
