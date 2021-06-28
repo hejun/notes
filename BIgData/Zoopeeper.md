@@ -13,8 +13,9 @@
     # cp conf/zoo_sample.cfg conf/zoo.cfg
     # vi conf/zoo.cfg
 
-    # 修改: dataDir=/hejun/data/zookeeper
-    # 添加: dataLogDir=/hejun/logs/zookeeper
+    dataDir=/hejun/data/zookeeper               # 修改
+    dataLogDir=/hejun/logs/zookeeper            # 新增
+    admin.enableServer=false                    # 新增
     ```
   - 分布式配置
     ```
