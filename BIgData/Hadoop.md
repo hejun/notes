@@ -56,7 +56,7 @@
       </property>
       <property>
         <name>hadoop.tmp.dir</name>
-        <value>/hejun/data/hadoop</value>
+        <value>/hejun/data/hadoop/tmp</value>
       </property>
       ```
     - hdfs-site.xml
@@ -75,11 +75,11 @@
         
         <property>
           <name>dfs.namenode.name.dir</name>
-          <value>/hejun/data/hdfs/name</value>
+          <value>/hejun/data/hadoop/hdfs/name</value>
         </property>
         <property>
           <name>dfs.datanode.data.dir</name>
-          <value>/hejun/data/hdfs/data</value>
+          <value>/hejun/data/hadoop/hdfs/data</value>
         </property>
         ```
     - yarn-site.xml
