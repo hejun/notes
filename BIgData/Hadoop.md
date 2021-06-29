@@ -180,7 +180,7 @@
   # 停止 Yarn
   systemctl stop yarn
   ```
-7. 开启端口   (只在 namenode 做)
+7. 开启端口
   
   |节点|端口|命令|
   |:--|:--|:--|
