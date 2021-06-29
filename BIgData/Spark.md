@@ -50,7 +50,8 @@
     export SCALA_HOME=/hejun/software/scala-2.12.10
     export HADOOP_HOME=/hejun/software/hadoop-3.2.0
     export SPARK_LOG_DIR=/hejun/logs/spark
-    export SPARK_MASTER_WEBUI_PORT=8080                   # 修改 WebUI 的端口,避免占用 8080 端口资源,端口号可任意指定,非必须
+    export SPARK_MASTER_WEBUI_PORT=8080                   # 修改 Master WebUI 的端口,避免占用 8080 端口资源,端口号可任意指定,非必须
+    export SPARK_WORKER_WEBUI_PORT=8081                   # 修改 Slave WebUI 的端口,避免占用 8081 端口资源,端口号可任意指定,非必须
     ```
     ```
     # vi conf/workers
@@ -82,6 +83,6 @@
     ```
   - 开放端口
     ```
-    firewall-cmd --zone=public --add-port=7077/tcp --add-port=<SPARK_MASTER_WEBUI_PORT/8080>/tcp --permanent
+    firewall-cmd --zone=public --add-port=7077/tcp --add-port=<SPARK_MASTER_WEBUI_PORT/8080>/tcp --add-port=<SPARK_WORKER_WEBUI_PORT/8081>/tco --permanent
     firewall-cmd --reload
     ```
