@@ -74,7 +74,7 @@
   |节点|端口|命令|
   |:--|:--|:--|
   |HMaster|16000/16010|firewall-cmd --zone=public --add-port=16000/tcp --add-port=16010/tcp --permanent|
-  |HRegionServer|16020|firewall-cmd --zone=public --add-port=16020/tcp --add-port=16030/tcp --permanent|
+  |HRegionServer|16020/16030|firewall-cmd --zone=public --add-port=16020/tcp --add-port=16030/tcp --permanent|
   ```
   firewall-cmd --reload
   ```
