@@ -82,7 +82,11 @@
     systemctl enable spark
     ```
   - 开放端口
+    
+    |节点|端口|命令|
+    |:--|:--|:--|
+    |Mstaer|7077/<SPARK_MASTER_WEBUI_PORT>|```firewall-cmd --zone=public --add-port=7077/tcp --add-port=<SPARK_MASTER_WEBUI_PORT>/tcp --permanent```|
+    |Worker|<SPARK_WORKER_WEBUI_PORT>|```firewall-cmd --zone=public --add-port=<SPARK_WORKER_WEBUI_PORT>/tcp --permanent```|
     ```
-    firewall-cmd --zone=public --add-port=7077/tcp --add-port=<SPARK_MASTER_WEBUI_PORT/8080>/tcp --add-port=<SPARK_WORKER_WEBUI_PORT/8081>/tco --permanent
     firewall-cmd --reload
     ```
