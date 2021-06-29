@@ -62,7 +62,7 @@
     
     [Unit]
     Description=Spark
-    After=hdfs.target,yarn.target
+    After=hdfs.target yarn.target
 
     [Service]
     User=root
