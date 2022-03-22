@@ -82,7 +82,7 @@
   ```
   > 停止
   
-- 开启自启
+- 开机自启
 
   ```
   vi /usr/lib/systemd/system/zookeeper.service
