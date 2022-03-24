@@ -62,7 +62,7 @@
   ```
   [Unit]
   Description=Kafka
-  After=zookeeper.target
+  After=network.target zookeeper.target
   
   [Service]
   User=root

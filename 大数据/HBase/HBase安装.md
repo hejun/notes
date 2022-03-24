@@ -115,7 +115,7 @@
   ```
   [Unit]
   Description=Hbase
-  After=zookeeper.target dfs.target
+  After=network.target zookeeper.target dfs.target
   
   [Service]
   User=root

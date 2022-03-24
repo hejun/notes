@@ -46,7 +46,7 @@
   ```
   [Unit]
   Description=Solr
-  After=zookeeper.target
+  After=network.target zookeeper.target
   
   [Service]
   User=root
