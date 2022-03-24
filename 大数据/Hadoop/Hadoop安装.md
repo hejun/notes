@@ -173,12 +173,12 @@
   - dfs
   
     ```
-    vi /usr/lib/systemd/system/hdfs.service
+    vi /usr/lib/systemd/system/dfs.service
     ```
     
     ```
     [Unit]
-    Description=Hdfs
+    Description=dfs
     After=network.target
     
     [Service]
@@ -223,7 +223,7 @@
     ```
     
     ```
-    systemctl enable hdfs
+    systemctl enable dfs
     ```
     
     ```
