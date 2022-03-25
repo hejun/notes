@@ -52,10 +52,23 @@
       <value>${HBASE_TMP_DIR}</value>
     </property>
     <property>
+      <name>hbase.unsafe.stream.capability.enforce</name>
+      <value>false</value>
+    </property>
+    <property>
       <name>hbase.zookeeper.quorum</name>
       <value>${ZOOKEEPER_HOST}</value>
     </property>
+    <property>
+      <name>hbase.rootdir</name>
+      <value>${HADOOP_FS.DEFAULTFS}/hbase</value>
+    </property>
+    <property>
+      <name>hbase.zookeeper.property.dataDir</name>
+      <value>${ZOOKEEPER_DATA_DIR}</value>
+    </property>
     ```
+    > `HADOOP_FS.DEFAULTFS` 是 hadoop 的 `core-site.xml` 里的 `fs.defaultFS` 配置<br/>`ZOOKEEPER_DATA_DIR` 是 Zookeeper 的 data 目录
     
     例:
     
@@ -69,8 +82,20 @@
       <value>/hejun/data/hbase/tmp</value>
     </property>
     <property>
+      <name>hbase.unsafe.stream.capability.enforce</name>
+      <value>false</value>
+    </property>
+    <property>
       <name>hbase.zookeeper.quorum</name>
       <value>node-01:2181,node-02:2181,node-03:2181</value>
+    </property>
+    <property>
+      <name>hbase.rootdir</name>
+      <value>hdfs://node-01:9000/hbase</value>
+    </property>
+    <property>
+      <name>hbase.zookeeper.property.dataDir</name>
+      <value>/hejun/data/zookeeper</value>
     </property>
     ```
   
