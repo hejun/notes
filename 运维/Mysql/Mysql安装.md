@@ -14,7 +14,13 @@ rpm -e --nodeps $(rpm -qa | grep mariadb)
      wget https://dev.mysql.com/get/mysql80-community-release-el7-5.noarch.rpm
      ```
 
-     1. 修改默认下载版本（非必须）
+     1. 安装 rpm
+        
+        ```
+        rpm -ivh mysql80-community-release-el7-5.noarch.rpm
+        ```
+
+     2. 修改默认下载版本（非必须）
 
         ```
         vi /etc/yum.repos.d/mysql-community.repo
