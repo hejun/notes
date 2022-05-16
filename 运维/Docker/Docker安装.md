@@ -123,3 +123,18 @@
 ### Docker 访问代理
 
 [参考文档](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
+
+```
+mkdir -p /etc/systemd/system/docker.service.d
+```
+
+```
+vi /etc/systemd/system/docker.service.d/http-proxy.conf
+```
+
+```
+[Service]
+Environment="HTTP_PROXY=${PROXY_HOST}"
+Environment="HTTPS_PROXY=${PROXY_HOST}"
+```
+> `${PROXY_HOST}` 为代理地址
