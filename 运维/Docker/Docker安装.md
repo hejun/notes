@@ -66,7 +66,6 @@
   EOF
   
   ```
-  > `hosts` 是开始免密远程访问能力, 开启有风险，会增加服务器风险，仅限开发时使用
 
   ```
   systemctl daemon-reload
