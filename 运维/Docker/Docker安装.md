@@ -138,3 +138,11 @@ Environment="HTTP_PROXY=${PROXY_HOST}"
 Environment="HTTPS_PROXY=${PROXY_HOST}"
 ```
 > `${PROXY_HOST}` 为代理地址
+
+```
+systemctl daemon-reload
+```
+
+```
+systemctl restart docker
+```
