@@ -103,21 +103,11 @@
     ```
     > 然后注释掉SWAP的自动挂载
 
-  - 开放所需端口 （或直接关闭防火墙）
-    
-      - Master节点
-        ```
-        firewall-cmd --zone=public --add-port=6443/tcp --add-port=2379-2380/tcp --add-port=10250/tcp --add-port=10259/tcp --add-port=10257/tcp --permanent
-        firewall-cmd --reload
-          
-        ```
-
-      - Node节点
-        ```
-        firewall-cmd --zone=public --add-port=10250/tcp --add-port=30000-32767/tcp --permanent
-        firewall-cmd --reload
-          
-        ```
+  - 关闭防火墙
+    ```
+    system stop firewalld
+    ```
+    > 不想关闭防火墙的可以参考官方端口文档(不推荐) [端口](https://kubernetes.io/zh/docs/reference/ports-and-protocols/)
 
   - 关闭SELinux
 
