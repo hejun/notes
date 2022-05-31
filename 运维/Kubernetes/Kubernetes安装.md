@@ -106,6 +106,8 @@
   - 关闭防火墙
     ```
     system stop firewalld
+    systemctl disable firewalld
+    
     ```
     > 不想关闭防火墙的可以参考官方端口文档(不推荐) [端口](https://kubernetes.io/zh/docs/reference/ports-and-protocols/)
 
