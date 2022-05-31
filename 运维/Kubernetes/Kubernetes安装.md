@@ -194,11 +194,8 @@
       ```
       kubeadm init \
       --apiserver-advertise-address=${MASTER_IP} \
-      --apiserver-cert-extra-sans=${想要额外添加的访问IP,非必须} \
-      --image-repository registry.cn-hangzhou.aliyuncs.com/google_containers \
       --pod-network-cidr=10.244.0.0/16
       ```
-      > 只在master执行, `--image-repository` 为设置 `k8s` 加速镜像, 无法使用外网的可以使用这个地址, 已经pull下镜像的无需此配置
 
     - 引导 `Node` 启动
       > 在每个Node节点粘贴执行引导 Master 后输出的 <br/> `kubeadm join **** --token ****` 语句
