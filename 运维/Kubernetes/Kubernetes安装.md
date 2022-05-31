@@ -116,7 +116,7 @@
     ```
     sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
     setenforce 0
-      
+    
     ```
 
   - 重置 iptables
@@ -127,7 +127,7 @@
     iptables -X
     iptables -X -t nat
     iptables -P FORWARD ACCEPT
-      
+    
     ```
 
   - 允许 iptables 检查桥接流量
