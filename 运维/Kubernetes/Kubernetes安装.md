@@ -105,7 +105,7 @@
 
   - 关闭防火墙
     ```
-    system stop firewalld
+    systemctl stop firewalld
     systemctl disable firewalld
     
     ```
