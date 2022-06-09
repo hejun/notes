@@ -193,7 +193,7 @@
 
       ```
       kubeadm init \
-      --kubernetes-version=${KUBENETES_VERSION}
+      --kubernetes-version=${KUBENETES_VERSION} \
       --apiserver-advertise-address=${MASTER_IP} \
       --pod-network-cidr=10.244.0.0/16
       ```
