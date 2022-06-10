@@ -2,6 +2,10 @@
 
 [参考文档](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
 
+### 前置条件
+
+[参考文档](https://projectcalico.docs.tigera.io/getting-started/kubernetes/requirements)
+
 ### 安装
 
 ```
