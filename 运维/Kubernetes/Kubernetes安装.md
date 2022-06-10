@@ -165,9 +165,16 @@
       > 参考 `https://developer.aliyun.com/mirror/kubernetes`
 
 - 安装
+ 
   ```
-  yum install kubelet kubeadm kubectl --disableexcludes=kubernetes -y 
+  yum list kubeadm --showduplicates -y | sort -r
   ```
+  > 查询 `Kubenetes` 的版本,
+  
+  ```
+  yum install kubelet kubeadm kubectl --disableexcludes=kubernetes -y
+  ```
+  > 指定版本安装方式为 `yum install kubelet-${VERSION} kubeadm-${VERSION} kubectl-${VERSION} --disableexcludes=kubernetes -y`
 
   ```
   crictl config --set runtime-endpoint=unix:///run/containerd/containerd.sock
