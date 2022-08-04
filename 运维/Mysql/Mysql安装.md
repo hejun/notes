@@ -63,7 +63,7 @@ rpm -e --nodeps $(rpm -qa | grep mariadb)
      > `--user` 意为指定Mysql启动用户, 可不添加. 添加时则需先把 `my.cnf` 中的相关目录（如: `datadir` ）创建并授权给 `--user` 后缀指定的用户
      > 非 `root` 用户启动还需关闭 `seinux`
      > ```
-     > sed -i s/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+     > sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
      > setenforce 0
      > ```
   3. 设置开机自启及启动
