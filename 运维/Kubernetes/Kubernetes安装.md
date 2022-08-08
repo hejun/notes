@@ -5,253 +5,180 @@
 ### 安装
 
 - 前置条件
+  - CPU 2核+
+  - 内存 2G+
+  - CentOS 7+
 
-    - CPU 2核+
-    - 内存 2G+
+- 环境准备
+  1. 关闭 `selinux`
 
-- 安装 `Containerd`
-  > `Docker` 自带 `Containerd`, 如果已经安装，可跳过
+     ```sh
+     sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+     setenforce 0
+     ```
 
-  ```
-  yum install yum-utils -y
-  ```
-  
-  ```
-  yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-  ```
-  > 阿里云加速, 原生地址配置为 <br/> `yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
+  2. 禁用交换分区
 
-  ```
-  yum install containerd.io -y
-  ```
-  
-  ```
-  containerd config default > /etc/containerd/config.toml
-  ```
-  > 导出并覆盖原本配置文件 (可修改配置文件中 `root` 来更改默认存储位置)
+     ```sh
+     swapoff -a
+     ```
+     ```sh
+     vi /etc/fstab
+     ```
+     然后注释掉所有类型为swap的交换分区
 
-  ```
-  ...
-  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-    SystemdCgroup = true
-  ```
-  > 在配置文件中找到上述配置, 修改 `SystemdCgroup` 为 `true`
+  3. 重置 `iptables`
 
-  ```
-  cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
-  overlay
-  br_netfilter
+     ```sh
+     iptables -F
+     iptables -F -t nat
+     iptables -X
+     iptables -X -t nat
+     iptables -P FORWARD ACCEPT
+     ```
+
+  4. 允许 iptables 检查桥接流量
+
+     ```sh
+     cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+     br_netfilter
+     EOF
+
+     cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+     net.bridge.bridge-nf-call-ip6tables = 1
+     net.bridge.bridge-nf-call-iptables = 1
+     EOF
+     sudo sysctl --system
+     ```
+
+  5. 开启必要端口
+
+     - 控制端
+
+       ```sh
+       firewall-cmd --zone=public \
+                    --add-port=2379-2380/tcp \
+                    --add-port=6443/tcp \
+                    --add-port=10250/tcp \
+                    --add-port=10257/tcp \
+                    --add-port=10259/tcp --permanent
+       firewall-cmd --reload
+       ```
+
+     - 工作节点
+
+       ```sh
+       firewall-cmd --zone=public --add-port=10250/tcp --add-port=30000-32767/tcp --permanent
+       firewall-cmd --reload
+       ```
+
+- 安装 `runtime`
+
+  [Docker 安装](../Docker/Docker安装.md)
+
+- 安装 `kubeadm` `kubelet` 和 `kubectl`
+
+  ```sh
+  cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+  [kubernetes]
+  name=Kubernetes
+  baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+  enabled=1
+  gpgcheck=1
+  repo_gpgcheck=1
+  gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
   EOF
-  
-  modprobe overlay
-  modprobe br_netfilter
-  
-  cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
-  net.bridge.bridge-nf-call-iptables  = 1
-  net.ipv4.ip_forward                 = 1
-  net.bridge.bridge-nf-call-ip6tables = 1
-  EOF
-  
-  sysctl --system
-  
   ```
-  
+  > 参考 `https://developer.aliyun.com/mirror/kubernetes`
+
+  ```sh
+  yum list kubeadm --showduplicates --nogpgcheck -y | sort -r
   ```
-  systemctl enable --now containerd
+  > 查询 `kubeadm` 版本，非必须
+
+  ```sh
+  yum install -y --nogpgcheck kubelet kubeadm kubectl --disableexcludes=kubernetes
   ```
-  > 设置自启并启动
+  > 指定安装版本<br/>`yum install -y --nogpgcheck kubelet-${VERSION} kubeadm-${VERSION} kubectl-${VERSION} --disableexcludes=kubernetes`
 
-- `Containerd` 代理
-  > 非必须步奏
-
-  ```
-  vi /usr/lib/systemd/system/containerd.service
-  ```
-  
-  ```
-  [Service]
-  Environment="HTTP_PROXY=${PROXY_URL}"
-  Environment="HTTPS_PROXY=${PROXY_URL}"
-  Environment="NO_PROXY=${NO_PROXY_UTL}"
-  ```
-  > 如示添加代理, `${PROXY_URL}` 为代理地址, `${NO_PROXY_UTL}` 为不代理的地址,逗号分割
-
-  ```
-  systemctl daemon-reload
-  ```
-  
-  ```
-  systemctl restart containerd
-  ```
-
-- 初始化 `Kubernetes` 环境
-
-  - 设置 `hosts`
-
-    ```
-    vi /etc/hosts
-    ```
-    > 然后添加 ip 与本机的映射
-  
-  - 关闭SWAP分区
-    ```
-    swapoff -a
-    ```
-
-    ```
-    vi /etc/fstab
-    ```
-    > 然后注释掉SWAP的自动挂载
-
-  - 关闭防火墙
-    ```
-    systemctl stop firewalld
-    systemctl disable firewalld
-    
-    ```
-    > 不想关闭防火墙的可以参考官方端口文档(不推荐) [端口](https://kubernetes.io/zh/docs/reference/ports-and-protocols/)
-
-  - 关闭SELinux
-
-    ```
-    sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
-    setenforce 0
-    
-    ```
-
-  - 重置 iptables
-
-    ```
-    iptables -F
-    iptables -F -t nat
-    iptables -X
-    iptables -X -t nat
-    iptables -P FORWARD ACCEPT
-    
-    ```
-
-  - 允许 iptables 检查桥接流量
-
-    ```
-    cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-    br_netfilter
-    EOF
-
-    cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-    net.bridge.bridge-nf-call-ip6tables = 1
-    net.bridge.bridge-nf-call-iptables = 1
-    EOF
-
-    sysctl --system
-    
-    ```
-
-- 安装 `kubernetes` 相关组件
-
-    - 设置 `kubernetes` 国内源
-
-      ```
-      cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-      [kubernetes]
-      name=Kubernetes
-      baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
-      enabled=1
-      gpgcheck=0
-      repo_gpgcheck=0
-      gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-      EOF
-
-      ```
-      > 参考 `https://developer.aliyun.com/mirror/kubernetes`
-
-- 安装
- 
-  ```
-  yum list kubeadm --showduplicates -y | sort -r
-  ```
-  > 查询 `Kubenetes` 的版本,
-  
-  ```
-  yum install kubelet kubeadm kubectl --disableexcludes=kubernetes -y
-  ```
-  > 指定版本安装方式为 `yum install kubelet-${VERSION} kubeadm-${VERSION} kubectl-${VERSION} --disableexcludes=kubernetes -y`
-
-  ```
-  crictl config --set runtime-endpoint=unix:///run/containerd/containerd.sock
-  crictl config --set image-endpoint=unix:///run/containerd/containerd.sock
-  
-  ```
-  > `crictl` 默认使用 `dockershim`, 需要修改为 `containerd`
-
-  ```
+  ```sh
   systemctl enable --now kubelet
   ```
 
-- 使用 kubeadm 创建集群
+- 引导集群
 
-    - 下载镜像
-
-      ```
-      kubeadm config images pull
-      ```
-      > 国内基本下不下来, 可通过上一步代理尝试下载, 也可通过下载的镜像进行导入导出<br/> 导出命令: `ctr -n=k8s.io image export - ${IMAGE:TAG} > ${TAR_NAME}.tar`,<br/> 导入命令: `ls *.tar | xargs -i ctr -n=k8s.io image import {}`
-
-    - 引导 `Master` 启动
-
-      ```
-      kubeadm init \
-      --kubernetes-version=${KUBENETES_VERSION} \
-      --apiserver-advertise-address=${MASTER_IP} \
-      --pod-network-cidr=10.244.0.0/16
-      ```
-
-    - 引导 `Node` 启动
-      > 在每个Node节点粘贴执行引导 Master 后输出的 <br/> `kubeadm join **** --token ****` 语句
-
-    - 设置 kubectl 工具
-
-      - `root` 用户
+  1. 查看所需镜像
   
-        ```
-        echo "# Kubectl" >> /etc/profile
-        echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /etc/profile
-        ```
+     ```sh
+     kubeadm config images list
+     ```
+  2. 拉取镜像
+
+     ```sh
+     kubeadm config images pull
+     ```
+     > 需能访问 `k8s.gcr.io`
+
+  3. 引导控制端
+
+     ```sh
+     kubeadm init \
+       --kubernetes-version=${KUBENETES_VERSION} \
+       --apiserver-advertise-address=${MASTER_IP} \
+       --pod-network-cidr=10.244.0.0/16
+     ```
+
+  4. 引导工作节点
+
+     在每个Node节点粘贴执行控制端输出的类似下方的语句:
+     
+     `kubeadm join **** --token ****`
+
+  5. 设置 `kubectl` 工具
+
+     - `root` 用户
+     
+       ```sh
+       echo "# Kubectl" >> /etc/profile
+       echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /etc/profile
+       ```
   
-        ```
-        source /etc/profile
-        ```
+       ```sh
+       source /etc/profile
+       ```
 
-      - 非`root` 用户
+     - 非 `root` 用户
 
-        ```
+        ```sh
         mkdir -p $HOME/.kube
         cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
         chown $(id -u):$(id -g) $HOME/.kube/config
         ```
 
-      - 验证是否成功
+  6. 验证
 
-        ```
-        kubectl get nodes
-        ```
-        > 有结果即表示成功
+     ```sh
+     kubectl get nodes
+     ```
 
-### 添加额外的访问IP
+### 扩展
 
-- 删除当前kubernetes集群下的 `apiserver` 的 `cert` 和 `key`
+- 添加额外的访问IP
 
-  ```
-  rm -rf /etc/kubernetes/pki/apiserver.*
-  ```
+  1. 删除当前kubernetes集群下的 `apiserver` 的 `cert` 和 `key`
 
-- 生成新的 `apiserver` 的 `cert` 和 `key`
+     ```sh
+     rm -rf /etc/kubernetes/pki/apiserver.*
+     ```
 
-  ```
-  kubeadm init phase certs apiserver --apiserver-advertise-address ${APISERVER_HOST} --apiserver-cert-extra-sans ${额外的IP}
-  ```
+  2. 生成新的 `apiserver` 的 `cert` 和 `key`
 
-- 刷新 `admin.conf`
+     ```sh
+     kubeadm init phase certs apiserver --apiserver-advertise-address ${APISERVER_HOST} --apiserver-cert-extra-sans ${额外的IP}
+     ```
 
-  ```
-  kubeadm alpha certs renew admin.conf
-  ```
+  3. 刷新 `admin.conf`
+
+     ```sh
+     kubeadm alpha certs renew admin.conf
+     ```
