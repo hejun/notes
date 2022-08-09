@@ -126,7 +126,7 @@
   ```
 
   ```sh
-  vi /etc/systemd/system/docker.service.d/http-proxy.conf
+  vi /usr/lib/systemd/system/docker.service
   ```
 
   ```sh
