@@ -12,7 +12,7 @@
 
 - 解压
 
-  ```
+  ```sh
   tar -zxvf hadoop-${hadoop.version}.tar.gz
   ```
   > ${hadoop.version} 为 `hadoop` 版本
@@ -21,11 +21,11 @@
 
   - `hadoop-env.sh`
   
-    ```
+    ```sh
     vi etc/hadoop/hadoop-env.sh
     ```
 
-    ```
+    ```sh
     export JAVA_HOME=${JAVA_HOME}
     export HADOOP_HOME=${HADOOP_HOME}
     export HADOOP_LOG_DIR=${HADOOP_LOG_DIR}
@@ -37,11 +37,11 @@
 
   - `yarn-env.sh`
   
-    ```
+    ```sh
     vi etc/hadoop/yarn-env.sh
     ```
   
-    ```
+    ```sh
     export YARN_NODEMANAGER_USER=root
     export YARN_RESOURCEMANAGER_USER=root
     ```
@@ -49,11 +49,11 @@
 
   - `core-site.xml`
   
-    ```
+    ```sh
     vi etc/hadoop/core-site.xml
     ```
     
-    ```
+    ```xml
     <property>
       <name>fs.defaultFS</name>
       <value>hdfs://${NameNode_URI}:9000</value>
@@ -66,7 +66,7 @@
     > 在 `configuration` 节点中加入上述配置
 
     例：
-    ```
+    ```xml
     <property>
       <name>fs.defaultFS</name>
       <value>hdfs://node-01:9000</value>
@@ -79,11 +79,11 @@
   
   - `hdfs-site.xml`
   
-    ```
+    ```sh
     vi etc/hadoop/hdfs-site.xml
     ```
     
-    ```
+    ```xml
     <property>
       <name>dfs.namenode.name.dir</name>
       <value>${NameNode_Dir}</value>
@@ -96,7 +96,7 @@
     
     例:
     
-    ```
+    ```xml
     <property>
       <name>dfs.namenode.name.dir</name>
       <value>/hejun/data/hadoop/hdfs/name</value>
@@ -109,11 +109,11 @@
   
   - `yarn-site.xml`
   
-    ```
+    ```sh
     vi etc/hadoop/yarn-site.xml
     ```
     
-    ```
+    ```xml
     <property>
       <name>yarn.resourcemanager.hostname</name>
       <value>${Master_Hostname}</value>
@@ -122,7 +122,7 @@
     
     例:
     
-    ```
+    ```xml
     <property>
       <name>yarn.resourcemanager.hostname</name>
       <value>node-01</value>
@@ -131,21 +131,21 @@
 
   - `workers`
   
-    ```
+    ```sh
     vi etc/hadoop/workers
     ```
     > 打开后删除 `localhost`, 添加 DataNode 的 hostname
     
     例:
     
-    ```
+    ```sh
     node-02
     node-03
     ```
 
   - 格式化文件系统
   
-    ```
+    ```sh
     ./bin/hdfs namenode -format
     ```
     > 该命令只在 NameNode 执行
@@ -156,12 +156,12 @@
 
   > 启停只在NameNode做, DataNode会通过 `etc/hadoop/workers` 配置的 hostname 进行启动
 
-  ```
+  ```sh
   sbin/start-dfs.sh
   ```
   > 启动
   
-  ```
+  ```sh
   sbin/stop-dfs.sh
   ```
   > 停止
@@ -172,11 +172,11 @@
 
   - dfs
   
-    ```
+    ```sh
     vi /usr/lib/systemd/system/dfs.service
     ```
     
-    ```
+    ```sh
     [Unit]
     Description=dfs
     After=network.target
@@ -195,11 +195,11 @@
 
   - yarn
   
-    ```
+    ```sh
     vi /usr/lib/systemd/system/yarn.service
     ```
     
-    ```
+    ```sh
     [Unit]
     Description=Yarn
     After=network.target
@@ -218,15 +218,15 @@
     
   - 开启自启
   
-    ```
+    ```sh
     systemctl daemon-reload
     ```
     
-    ```
+    ```sh
     systemctl enable dfs
     ```
     
-    ```
+    ```sh
     systemctl enable yarn
     ```
 
@@ -234,31 +234,31 @@
 
   - NameNode
   
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=9000/tcp --add-port=9820/tcp --add-port=9870-9871/tcp --permanent
     ```
   
   - SecondNameNode
   
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=9868/tcp --add-port=9869/tcp --permanent
     ```
     
   - Yarn
   
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=8088/tcp --add-port=8030-8033/tcp --permanent
     ```
     
   - DataNode
   
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=9864-9867/tcp --permanent
     ```
 
   - 重载
   
-    ```
+    ```sh
     firewall-cmd --reload
     ```
     
