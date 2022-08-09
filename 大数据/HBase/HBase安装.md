@@ -16,7 +16,7 @@
 
 - 解压
 
-  ```
+  ```sh
   tar -zxvf hbase-${hbase.version}-bin.tar.gz
   ```
   > ${hbase.version} 为 `hbase` 版本
@@ -25,11 +25,11 @@
 
   - `hbase-env.sh`
   
-    ```
+    ```sh
     vi conf/hbase-env.sh
     ```
     
-    ```
+    ```sh
     export JAVA_HOME=${JAVA_HOME}
     export HBASE_LOG_DIR=${HBASE_LOG_DIR}
     export HBASE_MANAGES_ZK=false
@@ -38,11 +38,11 @@
 
   - `hbase-site.xml`
   
-    ```
+    ```sh
     vi conf/hbase-site.xml
     ```
     
-    ```
+    ```xml
     <property>
       <name>hbase.cluster.distributed</name>
       <value>true</value>
@@ -72,7 +72,7 @@
     
     例:
     
-    ```
+    ```xml
     <property>
       <name>hbase.cluster.distributed</name>
       <value>true</value>
@@ -101,14 +101,14 @@
   
   - `regionservers`
   
-    ```
+    ```sh
     vi conf/regionservers
     ```
     > 打开后删除 `localhost`, 添加 RegionServers 的 hostname
 
     例:
     
-    ```
+    ```sh
     node-02
     node-03
     ```
@@ -119,12 +119,12 @@
 
   > 启停只在HMaster做, HRegionServer 会通过 `conf/regionservers` 配置的 hostname 进行启动
 
-  ```
+  ```sh
   bin/start-hbase.sh
   ```
   > 启动
   
-  ```
+  ```sh
   bin/stop-hbase.sh
   ```
   > 停止
@@ -133,11 +133,11 @@
 
   > 开机自启只在HMaster做, HRegionServer 会通过 `conf/regionservers` 配置的 hostname 进行启动
 
-  ```
+  ```sh
   vi /usr/lib/systemd/system/hbase.service
   ```
   
-  ```
+  ```sh
   [Unit]
   Description=Hbase
   After=network.target zookeeper.target dfs.target
@@ -154,11 +154,11 @@
   WantedBy=multi-user.target
   ```
   
-  ```
+  ```sh
   systemctl daemon-reload
   ```
   
-  ```
+  ```sh
   systemctl enable hbase
   ```
   
@@ -166,18 +166,18 @@
 
   - HMaster
   
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=16000/tcp --add-port=16010/tcp --permanent
     ```
   
   - HRegionServer
   
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=16020/tcp --add-port=16030/tcp --permanent
     ```
     
   - 重载
     
-    ```
+    ```sh
     firewall-cmd --reload
     ```
