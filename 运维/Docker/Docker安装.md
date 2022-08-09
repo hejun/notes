@@ -6,8 +6,9 @@
 
 ### 安装
 
-- 卸载老版本
-  ```
+1. 卸载老版本
+
+  ```sh
   yum remove docker \
              docker-client \
              docker-client-latest \
@@ -18,34 +19,35 @@
              docker-engine
   ```
 
-- 设置镜像仓库
+2. 设置镜像仓库
 
-  ```
+  ```sh
   yum install yum-utils -y
   ```
 
-  ```
+  ```sh
   yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
   ```
   > 阿里云加速, 原生地址配置为 <br/> `yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo`
 
-- 安装
+3. 安装
 
-  ```
+  ```sh
   yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
   ```
 
-- 设置镜像加速
+4. 设置镜像加速
 
-  ```
+  ```sh
   mkdir -p /etc/docker
   ```
 
-  ```
+  ```sh
   tee /etc/docker/daemon.json <<-'EOF'
   {
     "registry-mirrors": [
       "https://zv4800vv.mirror.aliyuncs.com",
+      "http://f1361db2.m.daocloud.io",
       "https://docker.mirrors.ustc.edu.cn",
       "https://hub-mirror.c.163.com"
     ],
@@ -64,24 +66,23 @@
     "data-root":"/hejun/data/docker"
   }
   EOF
-  
   ```
 
-  ```
+  ```sh
   systemctl daemon-reload
   ```
 
 - 启动服务
 
-  ```
+  ```sh
   systemctl enable docker
   ```
 
-  ```
+  ```sh
   systemctl start docker
   ```
 
-### 开启远程访问(非必须)
+### 扩展
 
 - 开启 `2375` 远程 `免密` 访问(增加漏洞风险，仅限开发时使用)
   
@@ -89,29 +90,26 @@
 
   - 修改 `systemd`
     
-    ```
+    ```sh
     vi /usr/lib/systemd/system/docker.service
     ```
     
-    ```
+    ```sh
     ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --containerd=/run/containerd/containerd.sock
     ```
     > 修改 ExecStart 添加 -H tcp://0.0.0.0:2375
     
-    ```
+    ```sh
     systemctl daemon-reload
     ```
     
-    ```
+    ```sh
     systemctl restart docker
     ```
     
   - 开启防火墙
-    ```
+    ```sh
     firewall-cmd --zone=public --add-port=2375/tcp --permanent
-    ```
-  
-    ```
     firewall-cmd --reload
     ```
 
@@ -119,29 +117,29 @@
 
   [参考文档](https://docs.docker.com/engine/security/protect-access/#use-tls-https-to-protect-the-docker-daemon-socket)
 
-### Docker 访问代理
+- Docker 访问代理
 
-[参考文档](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
+  [参考文档](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
 
-```
-mkdir -p /etc/systemd/system/docker.service.d
-```
+  ```sh
+  mkdir -p /etc/systemd/system/docker.service.d
+  ```
 
-```
-vi /etc/systemd/system/docker.service.d/http-proxy.conf
-```
+  ```sh
+  vi /etc/systemd/system/docker.service.d/http-proxy.conf
+  ```
 
-```
-[Service]
-Environment="HTTP_PROXY=${PROXY_HOST}"
-Environment="HTTPS_PROXY=${PROXY_HOST}"
-```
-> `${PROXY_HOST}` 为代理地址
+  ```sh
+  [Service]
+  Environment="HTTP_PROXY=${PROXY_HOST}"
+  Environment="HTTPS_PROXY=${PROXY_HOST}"
+  ```
+  > `${PROXY_HOST}` 为代理地址
 
-```
-systemctl daemon-reload
-```
+  ```sh
+  systemctl daemon-reload
+  ```
 
-```
-systemctl restart docker
-```
+  ```sh
+  systemctl restart docker
+  ```
