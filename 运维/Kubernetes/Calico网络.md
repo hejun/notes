@@ -1,7 +1,9 @@
 ## Calico网络
 
-[参考文档](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
-[参考文档](https://projectcalico.docs.tigera.io/getting-started/kubernetes/requirements)
+参考文档
+
+- [Calico安装](https://projectcalico.docs.tigera.io/getting-started/kubernetes/self-managed-onprem/onpremises)
+- [安装前置条件](https://projectcalico.docs.tigera.io/getting-started/kubernetes/requirements)
 
 ### 安装
 
