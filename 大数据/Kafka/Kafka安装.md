@@ -8,18 +8,18 @@
 
 - 解压
 
-  ```
+  ```sh
   tar -zxvf kafka_${kafka.version}.tgz
   ```
   > ${kafka.version} 为 `kafka` 版本
 
 - 修改配置文件
 
-  ```
+  ```sh
   vi config/server.properties
   ```
   
-  ```
+  ```sh
   broker.id=${broker-id}
   listeners=PLAINTEXT://0.0.0.0:9092
   advertised.listeners=PLAINTEXT://${server-ip}:9092
@@ -30,11 +30,11 @@
 
 - 修改logs路径
 
-  ```
+  ```sh
   vi bin/kafka-run-class.sh
   ```
   
-  ```
+  ```sh
   LOG_DIR=/hejun/logs/kafka
   ```
   > 在顶部下面新加
@@ -43,23 +43,23 @@
 
 - 启动 & 停止
 
-  ```
+  ```sh
   bin/kafka-server-start.sh -daemon config/server.properties
   ```
   > 启动
   
-  ```
+  ```sh
   bin/kafka-server-stop.sh
   ```
   > 停止
   
 - 开机自启
 
-  ```
+  ```sh
   vi /usr/lib/systemd/system/kafka.service
   ```
   
-  ```
+  ```sh
   [Unit]
   Description=Kafka
   After=network.target zookeeper.target
@@ -76,30 +76,30 @@
   WantedBy=multi-user.target
   ```
 
-  ```
+  ```sh
   systemctl daemon-reload
   ```
   
-  ```
+  ```sh
   systemctl enable kafka
   ```
 
-  ```
+  ```sh
   systemctl start kafka
   ```
   > 启动
   
-  ```
+  ```sh
   systemctl stop kafka
   ```
   > 停止
 
 - 开放端口
 
-  ```
+  ```sh
   firewall-cmd --zone=public --add-port=9092/tcp --permanent
   ```
 
-  ```
+  ```sh
   firewall-cmd --reload
   ```
