@@ -35,6 +35,7 @@
      iptables -X
      iptables -X -t nat
      iptables -P FORWARD ACCEPT
+     iptables --flush
      ```
 
   4. 允许 iptables 检查桥接流量
