@@ -11,6 +11,7 @@
 
   1. 允许 `Calico` 管理 `NetworkManager` 接口
 
+
      ```sh
      vi /etc/NetworkManager/conf.d/calico.conf
      ```
@@ -20,23 +21,12 @@
      unmanaged-devices=interface-name:cali*;interface-name:tunl*;interface-name:vxlan.calico;interface-name:wireguard.cali
      ```
 
- 2. 开启端口
+  2. 开启端口
 
-    - 控制端
-
-      ```sh
-      firewall-cmd --zone=public --add-port=179/tcp --add-port=443/tcp --add-port=6443/tcp --add-port=4789/tcp --permanent
-      firewall-cmd --reload
-      ```
-      > 使用 `Typha` 时，还需开启 `5473` 端口
-
-    - 工作节点
-
-      ```sh
-      firewall-cmd --zone=public --add-port=179/tcp --add-port=4789/tcp --permanent
-      firewall-cmd --reload
-      ```
-      > 使用 `Typha` 时，还需开启 `5473` 端口
+     ```sh
+     firewall-cmd --zone=public --add-port=179/tcp --add-port=4789/tcp --add-port=5473/tcp --permanent
+     firewall-cmd --reload
+     ```
 
 - 安装
 
@@ -64,5 +54,5 @@
   - name: IP_AUTODETECTION_METHOD
     value: "interface=enp0s3"
   ```
-  > 多网卡需要指定通信网卡, 在 `containers` 的 `name: calico-node` 容器下配置, `enp0s3` 是网卡名称，需要改为实际名称
-  > [参考资料](https://projectcalico.docs.tigera.io/reference/node/configuration#configuring-bgp-networking)
+  > 多网卡需要指定通信网卡, 在 `DaemonSet` 下的 `containers` 为 `name: calico-node` 的容器下配置该环境变量, `enp0s3` 是网卡名称，需要改为实际名称
+  > [参考资料](https://projectcalico.docs.tigera.io/networking/ip-autodetection#change-the-autodetection-method)
