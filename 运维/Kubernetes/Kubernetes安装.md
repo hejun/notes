@@ -58,14 +58,16 @@
 
        ```sh
        firewall-cmd --zone=public --add-port=2379-2380/tcp --add-port=6443/tcp --add-port=10250/tcp \
-                    --add-port=10257/tcp --add-port=10259/tcp --add-masquerade --permanent
+                    --add-port=10257/tcp --add-port=10259/tcp --permanent
+       firewall-cmd --zone=public --add-masquerade --permanent
        firewall-cmd --reload
        ```
 
      - 工作节点
 
        ```sh
-       firewall-cmd --zone=public --add-port=10250/tcp --add-port=30000-32767/tcp --add-masquerade --permanent
+       firewall-cmd --zone=public --add-port=10250/tcp --add-port=30000-32767/tcp --permanent
+       firewall-cmd --zone=public --add-masquerade --permanent
        firewall-cmd --reload
        ```
 
