@@ -24,9 +24,10 @@
   2. 开启端口
 
      ```sh
-     firewall-cmd --zone=public --add-port=179/tcp --add-port=4789/tcp --add-port=5473/tcp --permanent
+     firewall-cmd --zone=public --add-port=179/tcp --add-port=4789/tcp --permanent
      firewall-cmd --reload
      ```
+     > 使用 `Typha` 时，还需开启 `5473` 端口
 
 - 安装
 
