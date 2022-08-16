@@ -18,4 +18,4 @@ kubectl apply -f ingress-nginx.yaml
 
 - Image
   
-  `ingress-nginx.yaml`的镜像带有 `***@sha256***`，需要去掉 @sha256 及之后的字段
+  `ingress-nginx.yaml` 的镜像带有 `***@sha256***`，需要去掉 @sha256 及之后的字段
