@@ -122,9 +122,11 @@
      ```sh
      kubeadm init \
        --kubernetes-version=${KUBENETES_VERSION} \
+       --image-repository=${REGISTRY_URL} \
        --apiserver-advertise-address=${MASTER_IP} \
        --pod-network-cidr=10.244.0.0/16
      ```
+     > `image-repository` 是镜像地址
 
   4. 引导工作节点
 
