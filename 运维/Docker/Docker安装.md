@@ -63,7 +63,10 @@
     "storage-opts": [
       "overlay2.override_kernel_check=true"
     ],
-    "data-root":"/hejun/data/docker"
+    "data-root":"/hejun/data/docker",
+    "insecure-registries": [
+      "hejun-server:5000"
+    ]
   }
   EOF
   ```
