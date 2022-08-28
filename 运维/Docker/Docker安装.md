@@ -125,10 +125,6 @@
   [参考文档](https://docs.docker.com/config/daemon/systemd/#httphttps-proxy)
 
   ```sh
-  mkdir -p /etc/systemd/system/docker.service.d
-  ```
-
-  ```sh
   vi /usr/lib/systemd/system/docker.service
   ```
 
