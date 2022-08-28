@@ -65,7 +65,7 @@
     ],
     "data-root":"/hejun/data/docker",
     "insecure-registries": [
-      "hejun-server:5000"
+      "192.168.2.2"
     ]
   }
   EOF
