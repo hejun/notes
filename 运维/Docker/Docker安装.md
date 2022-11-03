@@ -63,7 +63,7 @@
     "storage-opts": [
       "overlay2.override_kernel_check=true"
     ],
-    "data-root":"/hejun/data/docker",
+    "data-root":"/data/docker",
     "insecure-registries": [
       "192.168.2.2"
     ]
