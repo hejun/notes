@@ -98,8 +98,5 @@
 
   ```sh
   firewall-cmd --zone=public --add-port=9092/tcp --permanent
-  ```
-
-  ```sh
   firewall-cmd --reload
   ```
