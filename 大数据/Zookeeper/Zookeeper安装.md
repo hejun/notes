@@ -98,14 +98,14 @@
   Group=root
   Type=forking
   Environment="JAVA_HOME=${JAVA_HOME}"
-  ExecStart=${Zookeeper_Home}/bin/zkServer.sh start ${Zookeeper_Home}/conf/zoo.cfg
-  ExecReload=${Zookeeper_Home}/bin/zkServer.sh restart
-  ExecStop=${Zookeeper_Home}/bin/zkServer.sh stop
+  ExecStart=${ZOOKEEPER_HOME}/bin/zkServer.sh start ${ZOOKEEPER_HOME}/conf/zoo.cfg
+  ExecReload=${ZOOKEEPER_HOME}/bin/zkServer.sh restart
+  ExecStop=${ZOOKEEPER_HOME}/bin/zkServer.sh stop
   
   [Install]
   WantedBy=multi-user.target
   ```
-  > 需要修改 ${JAVA_HOME}, ${Zookeeper_Home} 为真实目录
+  > 需要修改 `${JAVA_HOME}`, `${ZOOKEEPER_HOME}` 为真实目录
   
   ```sh
   systemctl daemon-reload
@@ -129,20 +129,14 @@
 
   - 单机
   
-  ```sh
-  firewall-cmd --zone=public --add-port=2181/tcp --permanent
-  ```
-  
-  ```sh
-  firewall-cmd --reload
-  ```
+    ```sh
+    firewall-cmd --zone=public --add-port=2181/tcp --permanent
+    firewall-cmd --reload
+    ```
   
   - 分布式
   
-  ```sh
-  firewall-cmd --zone=public --add-port=2181/tcp --add-port=2888/tcp --add-port=3888/tcp --permanent
-  ```
-  
-  ```sh
-  firewall-cmd --reload
-  ```
+    ```sh
+    firewall-cmd --zone=public --add-port=2181/tcp --add-port=2888/tcp --add-port=3888/tcp --permanent
+    firewall-cmd --reload
+    ```
