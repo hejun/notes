@@ -11,13 +11,13 @@ rpm -e --nodeps $(rpm -qa | grep mariadb)
   1. 配置 `Mysql` yum 源
      
      ```sh
-     wget https://dev.mysql.com/get/mysql80-community-release-el7-6.noarch.rpm
+     wget https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm
      ```
 
      1. 安装 rpm
         
         ```sh
-        rpm -ivh mysql80-community-release-el7-6.noarch.rpm
+        rpm -ivh mysql80-community-release-el7-7.noarch.rpm
         ```
 
      2. 修改默认下载版本（非必须）
