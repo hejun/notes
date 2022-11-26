@@ -23,13 +23,10 @@ rpm -e --nodeps $(rpm -qa | grep mariadb)
      2. 修改默认下载版本（非必须）
 
         ```sh
-        vi /etc/yum.repos.d/mysql-community.repo
+        yum-config-manager --disable mysql80-community
+        yum-config-manager --enable mysql57-community
         ```
         > 这一步可以不执行,不修改的话默认下载 `MySql 8`, 修改后为 `Mysql5.7`
-
-        > 将 [mysql57-community] 下的 enabled 改为 1
-
-        > 将 [mysql80-community] 下的 enabled 改为 0
 
   2. 安装 `MySql`
 
