@@ -33,7 +33,7 @@
 3. 安装
 
   ```sh
-  yum install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+  yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   ```
 
 4. 设置镜像加速
@@ -60,9 +60,6 @@
       "max-file": "1"
     },
     "storage-driver": "overlay2",
-    "storage-opts": [
-      "overlay2.override_kernel_check=true"
-    ],
     "data-root":"/hejun/data/docker",
     "insecure-registries": [
       "192.168.2.2"
@@ -76,6 +73,11 @@
   ```
 
 - 启动服务
+
+  ```
+  setenforce 0
+  ```
+  > 临时关闭selinux
 
   ```sh
   systemctl enable docker
