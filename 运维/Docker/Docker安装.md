@@ -33,7 +33,7 @@
 3. 安装
 
   ```sh
-  yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
   ```
 
 4. 设置镜像加速
