@@ -1,9 +1,5 @@
 ## Redis安装
 
-### 下载
-
-[Redis下载官网](https://download.redis.io/releases/)
-
 ### 配置优化
 
 - Tcp Block
@@ -20,19 +16,29 @@
   sysctl -p
   ```
 
-### 安装配置
+### 安装
+
+- 下载
+
+  最新稳定版:
+  ```
+  wget https://download.redis.io/redis-stable.tar.gz
+  ```
+
+  其他版本
+
+  [Redis下载官网](https://download.redis.io/releases/)
 
 - 解压
 
   ```sh
-  tar -zxvf redis-${redis.version}.tar.gz
+  tar -xzvf redis-stable.tar.gz
   ```
-  > ${redis.version} 为 `redis` 版本
 
 - 编译
 
   ```sh
-  cd redis-${redis.version}
+  cd redis-stable
   ```
 
   ```sh
@@ -56,7 +62,7 @@
   例:
 
   ```sh
-  make MALLOC=libc PREFIX=/hejun/software/redis-6 install
+  make MALLOC=libc PREFIX=/opt/redis install
   ```
   
   ```sh
@@ -67,8 +73,8 @@
   例:
 
   ```sh
-  mkdir /hejun/software/redis-6/conf
-  cp redis.conf ../redis-6/conf
+  mkdir /opt/redis/conf
+  cp redis.conf /opt/redis/conf
   ```
 
 - 开机自启
