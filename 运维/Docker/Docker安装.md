@@ -47,7 +47,6 @@
   {
     "registry-mirrors": [
       "https://zv4800vv.mirror.aliyuncs.com",
-      "http://f1361db2.m.daocloud.io",
       "https://docker.mirrors.ustc.edu.cn",
       "https://hub-mirror.c.163.com"
     ],
@@ -60,7 +59,7 @@
       "max-file": "1"
     },
     "storage-driver": "overlay2",
-    "data-root":"/hejun/data/docker",
+    "data-root":"/opt/docker",
     "insecure-registries": [
       "192.168.2.2"
     ]
