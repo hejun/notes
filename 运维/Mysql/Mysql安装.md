@@ -6,6 +6,13 @@
 rpm -e --nodeps $(rpm -qa | grep mariadb)
 ```
 
+### 安装 `yum-utils`
+
+```
+yum -y install yum-utils
+```
+> 替换 Mysql 版本用，如要使用默认版本，可以跳过该步奏
+
 ### 安装 `Mysql`
 
   1. 配置 `Mysql` yum 源
@@ -21,9 +28,6 @@ rpm -e --nodeps $(rpm -qa | grep mariadb)
         ```
 
      2. 修改默认下载版本（非必须）
-        ```
-        yum -y install yum-utils
-        ```
 
         ```sh
         yum-config-manager --disable mysql80-community
