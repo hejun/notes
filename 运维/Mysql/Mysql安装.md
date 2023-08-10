@@ -21,6 +21,9 @@ rpm -e --nodeps $(rpm -qa | grep mariadb)
         ```
 
      2. 修改默认下载版本（非必须）
+        ```
+        yum -y install yum-utils
+        ```
 
         ```sh
         yum-config-manager --disable mysql80-community
