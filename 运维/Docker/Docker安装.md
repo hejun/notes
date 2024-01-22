@@ -46,6 +46,8 @@
   tee /etc/docker/daemon.json <<-'EOF'
   {
     "registry-mirrors": [
+      "http://hub-mirror.c.163.com",
+      "https://mirror.ccs.tencentyun.com",
       "https://docker.mirrors.ustc.edu.cn",
       "https://registry.docker-cn.com"
     ],
