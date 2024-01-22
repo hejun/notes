@@ -46,9 +46,8 @@
   tee /etc/docker/daemon.json <<-'EOF'
   {
     "registry-mirrors": [
-      "https://zv4800vv.mirror.aliyuncs.com",
       "https://docker.mirrors.ustc.edu.cn",
-      "https://hub-mirror.c.163.com"
+      "https://registry.docker-cn.com"
     ],
     "exec-opts": [
       "native.cgroupdriver=systemd"
