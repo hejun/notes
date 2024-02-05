@@ -42,17 +42,9 @@
   ```
 
   ```sh
-  yum install centos-release-scl -y
+  yum install gcc gcc-c++ -y
   ```
-  
-  ```sh
-  yum install devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-binutils -y
-  ```
-  
-  ```sh
-  scl enable devtoolset-9 bash
-  ```
-  > 临时有效，退出 shell 或重启会恢复原 gcc 版本
+  > 编译需要gcc
 
   ```sh
   make MALLOC=libc PREFIX=${REDIS_HOME} install
