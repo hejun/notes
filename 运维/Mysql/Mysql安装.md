@@ -98,25 +98,11 @@ yum -y install yum-utils
         ```
 
      3. 登陆后修改密码及验证规则
-        1. 修改验证规则 (非必须)
 
-           ```mysql
-           set global validate_password_policy=0;
-           ```
-
-           > 修改密码验证策略为low（只验证长度）
-
-           ```mysql
-           set global validate_password_length=4;
-           ```
-
-           > 修改密码验证策略密码长度的最小值
-
-        2. 修改密码
-
-           ```mysql
-           set password=PASSWORD('1234');
-           ```
+        ```mysql
+        ALTER user 'root'@'localhost' IDENTIFIED BY 'Hj1234';
+        ```
+        > MySql5 使用 `set password=PASSWORD('Hj1234');`
 
      4. 登陆后设置远程访问
 
