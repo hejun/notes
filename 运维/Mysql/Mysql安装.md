@@ -52,11 +52,10 @@ yum -y install yum-utils
      按需配置
 
      ```sh
-     character-set-server=utf8mb4
      default-time_zone=+8:00
      lower_case_table_names=1
      group_concat_max_len=102400
-     sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+     sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
      ```
 
   2. 初始化 `Mysql`
