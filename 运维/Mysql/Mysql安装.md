@@ -53,11 +53,13 @@ yum -y install yum-utils
 
      ```sh
      character-set-server=utf8mb4
+     collation-server=utf8mb4_unicode_ci
      default-time_zone=+8:00
      lower_case_table_names=1
      group_concat_max_len=102400
      sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
      ```
+     > `utf8mb4_unicode_ci`是`MySql8`的，`MySql5`使用`utf8mb4_general_ci`
 
   2. 初始化 `Mysql`
 
