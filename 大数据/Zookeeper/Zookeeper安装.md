@@ -24,8 +24,8 @@
   ```
   
   ```sh
-  dataDir=/hejun/data/zookeeper
-  dataLogDir=/hejun/logs/zookeeper
+  dataDir=/opt/zookeeper/data
+  dataLogDir=/opt/zookeeper/log
   admin.enableServer=false
   ```
   > `dataDir` 是 `Zookeeper` 存放数据的目录.<br/> `dataLogDir` 默认不存在, 需新增, 是 `Zookeeper` 存放日志的地方.<br/> `admin.enableServer` 是 `3.5.0` 版本中新增特性, `ture` 为开启, `false` 为关闭.
