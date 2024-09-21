@@ -54,7 +54,7 @@
     例如：
     
     ```sh
-    echo 1 > /hejun/data/zookeeper/myid
+    echo 1 > /opt/zookeeper/data/myid
     ```
 
   - 修改logs路径
