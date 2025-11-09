@@ -46,7 +46,7 @@
   tee /etc/docker/daemon.json <<-'EOF'
   {
     "registry-mirrors": [
-      "https://registry.docker-cn.com"
+      "https://docker.1ms.run"
     ],
     "exec-opts": [
       "native.cgroupdriver=systemd"
