@@ -53,7 +53,7 @@ yum -y install yum-utils
 
      ```sh
      character-set-server=utf8mb4
-     collation-server=utf8mb4_unicode_ci
+     collation-server=utf8mb4_0900_ai_ci
      default-time_zone=+8:00
      lower_case_table_names=1
      group_concat_max_len=102400
